@@ -45,9 +45,10 @@ mongoose.mongodb = mongoose.connect(`mongodb+srv://mtdecaf:${password}@userinfo.
     console.log(err);
 }); 
 
-app.use(express.static(path.join(__dirname, 'public')))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+express()
+.use(express.static(path.join(__dirname, 'public')))
+.set('views', path.join(__dirname, 'views'))
+.set('view engine', 'ejs')
 
 // authentication and authorization routes
 app.use('/signup', signUpRoute);
