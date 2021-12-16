@@ -5,19 +5,19 @@ const cors = require('cors');
 require('dotenv').config();
 
 
-const signUpRoute = require('./routes/SignUpRoute');
-const logInRoute = require('./routes/LogInRoute');
+const signUpRoute = require('./server/routes/SignUpRoute');
+const logInRoute = require('./server/routes/LogInRoute');
 
-const addTripRoute = require('./routes/AddTripRoute');
-const getUserTripsRoute = require('./routes/GetUserTripsRoute');
-const getCurrentTripRoute = require('./routes/GetCurrentTripRoute');
-const editTripRoute = require('./routes/EditTripRoute');
-const deleteTripRoute = require('./routes/DeleteTripRoute');
+const addTripRoute = require('./server/routes/AddTripRoute');
+const getUserTripsRoute = require('./server/routes/GetUserTripsRoute');
+const getCurrentTripRoute = require('./server/routes/GetCurrentTripRoute');
+const editTripRoute = require('./server/routes/EditTripRoute');
+const deleteTripRoute = require('./server/routes/DeleteTripRoute');
 
-const addEventsRoute = require('./routes/AddEventsRoute');
+const addEventsRoute = require('./server/routes/AddEventsRoute');
 
 // authorization middleware
-const TokenAuth = require('./routes/TokenAuth');
+const TokenAuth = require('./server/routes/TokenAuth');
 
 
 // port at 8080 if not specified
