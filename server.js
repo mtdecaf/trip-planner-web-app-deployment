@@ -44,6 +44,11 @@ mongoose.mongodb = mongoose.connect(`mongodb+srv://mtdecaf:${password}@userinfo.
 }).catch(err => {
     console.log(err);
 }); 
+
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+
 // authentication and authorization routes
 app.use('/signup', signUpRoute);
 app.use('/login', logInRoute);
@@ -63,4 +68,5 @@ app.use('/addevents', addEventsRoute)
 app.use("/welcome", TokenAuth);
 
 app.listen({port}, () => {
+    console.log(`Server is listening on port ${port}`);
 });
