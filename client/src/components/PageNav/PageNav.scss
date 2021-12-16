@@ -1,0 +1,75 @@
+@use "../../styles/partials/colors.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/global.scss";
+
+
+.page-nav{
+    background-color: $primary-blue;
+    display: flex;
+    flex-direction: column;
+    height: 6.5rem;
+    @include mobile-side-padding;
+    @include tablet{
+        height: 4.2rem;
+        flex-direction: row;
+        @include tablet-side-padding;   
+    }
+    @include desktop{
+        @include desktop-side-padding;
+    }
+    &__logo{
+        width: 2.5rem;
+        margin-top: 0.5rem;
+        &-link{
+            width: 2.5rem;
+        }
+        &-wrap{
+            display: flex;
+            justify-content: center;
+            @include tablet{
+                margin-top: 0;
+            }
+        }
+    }
+    // logged in
+    &__profile{
+        display: flex;
+        // height: 2rem;
+        justify-content: space-around;
+        align-items: flex-end;
+    }
+    &__button{
+        background-color: $primary-beige;
+        width: 5rem;
+        padding: 0.2rem 0.75rem;
+        border-radius: 25rem;
+        border: 3px solid $primary-red;
+        margin: 0.5rem 0;
+        text-decoration: none;
+        color: $text-light;
+        font-weight: 600;
+        transition: transform .25s;
+        &:hover{
+            transform: scale(1.1);
+            background-color: $primary-red;
+            color: $text-light;
+        }
+        @include tablet{
+            margin: 1rem;
+        }
+    }
+    &__username{
+        font-size: 1.25rem;
+    }
+    &__log-out{
+        font-size: 1.2rem;
+    }
+    // logged out
+    &__signup, &__login{
+        text-decoration: none;
+        color: $text-light;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+}
+

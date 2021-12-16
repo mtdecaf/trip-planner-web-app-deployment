@@ -1,0 +1,49 @@
+@use "../../styles/global.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/colors.scss" as *;
+.add-event{
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    top:0;
+    &__modal{
+        background-color: $primary-beige;
+        border-radius: 5px;
+        width: 38rem;
+        height:35rem;
+        position: relative;
+        top: 10rem;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__element, &__button{
+        width: 80%;
+        @include tablet{
+            width: 16rem;
+        }
+    }
+    &__input{
+        @include input-styling;
+        margin-bottom: 1rem;
+    }
+    &__select{
+        width: 83%;
+        @include tablet{
+            width: 17rem;
+        }
+
+    }
+    &__button{
+        @include button-styling;
+        width: 17.25rem;
+    }
+    &__error{
+        @include error-styling;
+    }
+}

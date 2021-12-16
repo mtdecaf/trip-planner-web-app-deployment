@@ -1,0 +1,67 @@
+@use "../../styles/global.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/colors.scss" as *;
+
+.sign-up{
+    height: calc(100vh - 6.5rem);
+    background-color: $primary-beige;
+    display: flex;
+    justify-content: center;
+    @include tablet{
+        height: calc(100vh - 4.2rem);
+    }
+    &__wrap{
+        background-color: white;
+        height: 20rem;
+        margin-top:7rem;
+        width: 80%;
+        border-radius: 25px;
+        border: 3px solid $primary-red;
+        display: flex;
+        flex-direction: column;
+        @include tablet{
+            width: 35rem;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+    }
+    &__title{
+        color: $text-light;
+        font-size: 1.75rem;
+        margin: 1rem 0;
+        @include tablet{
+            font-size: 2.25rem;
+            margin:0 3rem 10rem 0;
+        }
+    }
+    &__error{
+        @include error-styling;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        margin: 0 1.5rem;
+
+        &-label{
+            margin: 0.05rem 0;
+            text-align: start;
+            @include tablet{
+                margin: 0.1rem 0;
+            }
+        }
+        &-input{
+            outline: none;
+            margin: 0.1rem 0;
+            @include input-styling;
+            @include tablet{
+                margin: 0.2rem 0;
+            }
+            
+        }
+        &-button{
+            @include button-styling;
+        }
+    }
+}

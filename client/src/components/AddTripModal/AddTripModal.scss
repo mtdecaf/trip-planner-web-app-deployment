@@ -1,0 +1,56 @@
+@use "../../styles/global.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/colors.scss" as *;
+
+.add-trip{
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    &__modal{
+        background-color: $primary-beige;
+        border-radius: 5px;
+        border: 3px solid $primary-red;
+        position: relative;
+        top:5rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: 32rem;
+        @include tablet{
+            top: 10rem;
+            flex-direction: row;
+            width: auto;
+            height: 20rem;
+        }
+    }
+    &__form{
+        margin-top: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include tablet{
+            margin: 4rem 0 0 2rem;
+        }
+    }
+    &__input{
+        width: 12rem;
+        margin: 0.25rem 0;
+        @include input-styling;
+    }
+    &__button{
+        width: 13rem;
+        @include button-styling;
+        &:disabled{
+            border-color: gray;
+            background-color: white;
+        }
+    }
+}
+.react-calendar{
+    display: inline-block;
+    margin: 0 auto;
+}

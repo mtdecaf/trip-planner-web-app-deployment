@@ -1,0 +1,13 @@
+@use "./partials/typography.scss" as *;
+@use "./partials/colors.scss" as *;
+
+// reset all margins and paddings
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    font-family: $font-stack;
+    background-color: $primary-beige;
+}

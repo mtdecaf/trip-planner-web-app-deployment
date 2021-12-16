@@ -1,0 +1,66 @@
+@use "variables" as *;
+@use "colors" as *;
+
+// media breakpoints
+@mixin tablet {
+    @media (min-width: $tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $desktop) {
+        @content;
+    }
+}
+
+// section dividers
+@mixin divider {
+    border-bottom: 1px solid $Mercury;
+}
+
+// side paddings
+@mixin mobile-side-padding {
+    padding: 0 1rem;
+}
+@mixin tablet-side-padding {
+    padding: 0 2.25rem;
+}
+@mixin desktop-side-padding {
+    padding: 0 5.5rem;
+}
+
+// input styling
+@mixin input-styling {
+    padding: 0.2rem 0.5rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    &:focus{
+        border: 2px solid $primary-red;
+    }
+}
+
+// button styling
+@mixin button-styling {
+    background-color: $primary-beige;
+    border: 2px solid $primary-red;
+    border-radius: 5px;
+    color: $text-light;
+    padding: 0.25rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    &:hover{
+        background-color: $primary-red;
+        color: $text-light;
+    }
+    @include tablet{
+        margin: 0.75rem 0;
+    }
+}
+// error styling
+@mixin error-styling {
+    color: $error-red;
+    font-size: 1rem;
+    font-weight: 600;
+}
