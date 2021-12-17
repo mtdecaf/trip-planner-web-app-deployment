@@ -61,13 +61,14 @@ app.use('/addevents', addEventsRoute)
 app.use("/welcome", TokenAuth);
 
 process.env.NODE_ENV = 'production';
+console.log(__dirname);
 console.log(process.env.NODE_ENV);
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, './client/build')));
+// if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../build')))
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, './client/build', 'index.html'));
-    });
-}
+        res.sendFile(path.join(__dirname, '../build'))
+    })
+// }
 
 app.listen({port}, () => {
     console.log(`Server is listening on port ${port}`);
