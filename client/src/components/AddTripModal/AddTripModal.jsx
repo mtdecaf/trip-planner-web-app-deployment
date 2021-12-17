@@ -45,7 +45,7 @@ const AddTripModal = (props) => {
         let days = Math.ceil(diff / (1000 * 3600 * 24));
         if(days <= 7) {
         // post the information to the backend
-        axios.post('http://localhost:8080/addtrip', {date, startLocation, endLocation, tripName: tripName.value, email: props.email, tripId})
+        axios.post('/addtrip', {date, startLocation, endLocation, tripName: tripName.value, email: props.email, tripId})
         .then(res => {
             // post date, start location, end location, trip name to the backend
             props.toggleAddTrip();

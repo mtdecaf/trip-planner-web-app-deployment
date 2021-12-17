@@ -27,7 +27,7 @@ const PlannerPage = () => {
     // on load, get the trip data
     useEffect(() => {
         const token = sessionStorage.getItem("token");
-        axios.get(`http://localhost:8080/getcurrenttrip/${tripId}`,
+        axios.get(`/getcurrenttrip/${tripId}`,
         {
             headers: {
                 "Authorization": `Bearer ${token}`

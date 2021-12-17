@@ -64,7 +64,7 @@ const AddEventModal = (props) => {
             ];
             console.log(props.events);
             // post the new events data to the database just like the add event button
-            axios.post(`http://localhost:8080/addevents/${tripId}`, {
+            axios.post(`/addevents/${tripId}`, {
                 events: props.events,
             }, {
                 headers: {

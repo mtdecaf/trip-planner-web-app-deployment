@@ -32,7 +32,7 @@ function App() {
                 },
             }
             // if the token is valid, set the state to logged in
-            axios.get("http://localhost:8080/welcome", config)
+            axios.get("/welcome", config)
             .then(res => {
                 if (res.status === 200) {
                     setIsLoggedIn(true);
@@ -47,7 +47,7 @@ function App() {
             })
             // get the trip data from the server
             // pass the user email to the server
-            axios.get("http://localhost:8080/gettrip", config)
+            axios.get("/gettrip", config)
             .then(res => {
                 setTripData(res.data);
             })

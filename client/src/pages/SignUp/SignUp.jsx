@@ -57,8 +57,7 @@ const UserAuth = () => {
             [e.target.name]: e.target.value
         });
         // post only the username, email, and password to the server
-        axios
-        .post("http://localhost:8080/signup", { username, email, password })
+        axios.post("/signup", { username, email, password })
         .then(res => {
         })
         // go to login page if user is created

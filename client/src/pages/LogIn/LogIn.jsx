@@ -32,7 +32,7 @@ const LogIn = () => {
             setErrorMessage("Please enter a password");
         }
         // make a post the login info to the server, if successful, set isLoggedIn to true
-        axios.post("http://localhost:8080/login", { email, password })
+        axios.post("/login", { email, password })
         .then(res => {
             setIsLoggedIn(true);
             // store the token in session storage if successful
