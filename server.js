@@ -3,6 +3,7 @@ const express = require('express')
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 
 const signUpRoute = require('./server/routes/SignUpRoute');
@@ -23,6 +24,7 @@ const TokenAuth = require('./server/routes/TokenAuth');
 // port at 8080 if not specified
 const port = process.env.PORT || 8080;
 const password = process.env.DBPASSWORD;
+console.log(password)
 
 app.use(express.json());
 app.use(cors());
@@ -37,13 +39,7 @@ app.options('*', cors())
 //     .catch(err => {
 //         console.log(err);
 //     });
-mongoose.mongodb = mongoose.connect(`mongodb+srv://mtdecaf:${password}@userinfo.bsbxr.mongodb.net/userInfo?retryWrites=true&w=majority`)
-// check if connection is successful
-.then(() => {
-    console.log('Connected to the Atlas database');
-}).catch(err => {
-    console.log(err);
-}); 
+mongoose.mongodb = mongoose.connect(`mongodb+srv://mtdecaf:${password}@userinfo.bsbxr.mongodb.net/userInfo?retryWrites=true&w=majority`); 
 
 
 // authentication and authorization routes
@@ -63,6 +59,15 @@ app.use('/addevents', addEventsRoute)
 
 // middleware to handle token verification after logging in
 app.use("/welcome", TokenAuth);
+
+process.env.NODE_ENV = 'production';
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, './client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+    });
+}
 
 app.listen({port}, () => {
     console.log(`Server is listening on port ${port}`);
