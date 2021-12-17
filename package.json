@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-
-    "server": "npm install && node server.js",
-    "client": "cd client && npm install && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "server": "nodemon server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
     "nodemon": "^2.0.15"
   },
   "engines": {
-    "node": "16.x"
+    "node": "14.17.0"
   },
   "proxy": "http://localhost:8080"
 }
