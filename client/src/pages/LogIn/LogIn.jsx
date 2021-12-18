@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios"
+import axios from "../../middleware/axiosConfig";
 import "./LogIn.scss";
 
 const LogIn = () => {

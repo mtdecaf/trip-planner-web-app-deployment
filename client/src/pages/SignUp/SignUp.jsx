@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../middleware/axiosConfig";
 import { useState } from "react";
 
 import "./SignUp.scss";

@@ -24,7 +24,6 @@ const TokenAuth = require('./server/routes/TokenAuth');
 // port at 8080 if not specified
 const port = process.env.PORT || 8080;
 const password = process.env.DBPASSWORD;
-console.log(password)
 
 app.use(express.json());
 app.use(cors());
@@ -60,15 +59,12 @@ app.use('/addevents', addEventsRoute)
 // middleware to handle token verification after logging in
 app.use("/welcome", TokenAuth);
 
-process.env.NODE_ENV = 'production';
-console.log(__dirname);
-console.log(process.env.NODE_ENV);
-// if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, "client", "build")))
     app.get("*", (req, res) => {
         res.sendFile(path.join(__dirname, "client", "build", "index.html"));
     });
-// }
+}
 
 app.listen({port}, () => {
     console.log(`Server is listening on port ${port}`);

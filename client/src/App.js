@@ -1,7 +1,7 @@
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../src/middleware/axiosConfig.js";
 
 import PageNav from './components/PageNav/PageNav';
 import HomePage from './pages/HomePage/HomePage';
@@ -55,6 +55,7 @@ function App() {
         }
         // repeat every time username, email, or trip data changes
     }, [username, email, tripData.length]);
+    console.log(process.env);
     return (
         <div className="App">
             <PageNav isLoggedIn={isLoggedIn} username={username} />

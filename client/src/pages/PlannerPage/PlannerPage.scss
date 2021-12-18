@@ -5,21 +5,21 @@
 .calendar{
     &__header{
         display: flex;
-        justify-content: space-between;
         margin: 1.5rem 0;
         @include mobile-side-padding;
         @include tablet{
-            justify-content: start;
+            justify-content: space-between;
             @include tablet-side-padding;
         }
     }
-    &__name-wrap{
+    &__edit{
+        margin-left: 2rem;
+    }
+    &__name-wrap, &__add-delete-wrap{
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-right: 2rem;
     }
-    &__add{
+    &__delete{
         margin-left: 2rem;
     }
 }

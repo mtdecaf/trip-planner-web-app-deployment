@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../middleware/axiosConfig";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';

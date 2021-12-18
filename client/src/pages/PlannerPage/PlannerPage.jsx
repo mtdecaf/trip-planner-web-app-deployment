@@ -2,7 +2,7 @@ import "./PlannerPage.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Timetable from 'react-timetable-events'
-import axios from "axios";
+import axios from "../../middleware/axiosConfig";
 
 import AddEventModal from "../../components/AddEventModal/AddEventModal";
 
@@ -34,11 +34,9 @@ const PlannerPage = () => {
             }
         })
         .then(res => {
-            console.log(res.data);
             setTripData(res.data);
         })
         .catch(err => {
-            console.log(err);
         })
     }, [])
 
@@ -46,11 +44,9 @@ const PlannerPage = () => {
     useEffect(() => {
         // check if the tripData is populated
         if (Object.keys(tripData).length > 0) {
-            console.log("tripData was updated");
             let dateFrame = [];
             // check if the tripData.events is populated
             if (tripData.events && Object.keys(tripData.events).length > 0) {
-                console.log("tripData.events was populated & updated");
                 // get the dates
                 let startDate = new Date(tripData.startDate);
                 let endDate = new Date(tripData.endDate);
@@ -68,7 +64,6 @@ const PlannerPage = () => {
                     // check if the array is populated
                     if (tripData.events[key].length > 0) {
                         // loop through the array, and change the startTime and endTime to Date objects
-                        console.log(tripData.events[key]);
                         for (let i = 0; i < tripData.events[key].length; i++) {
                             tripData.events[key][i].startTime = new Date(tripData.events[key][i].startTime);
                             tripData.events[key][i].endTime = new Date(tripData.events[key][i].endTime);
@@ -83,14 +78,14 @@ const PlannerPage = () => {
                     }
                 })
                 .then(res => {
-                    console.log(res);
+                })
+                .catch(err => {
                 })
                 setIsReady(true);
 
                 // set the trip name for editing use
                 setTripName(tripData.tripName);
             } else {
-                console.log("tripData.events was not populated & updated");
                 // populate the events with empty arrays for each date from the start date to the end date, including the start date and end date
                 let timeFrame = [];
                 let blankEvents = {};
@@ -111,9 +106,7 @@ const PlannerPage = () => {
                 })
                 tripData.events = blankEvents;
                 setEvents(tripData.events);
-                console.log(dateFrame);
                 setDates(dateFrame);
-                console.log(tripData);
                 // update the tripData on the backend
                 axios.post(`http://localhost:8080/addevents/${tripId}`, tripData
                 , {
@@ -122,7 +115,6 @@ const PlannerPage = () => {
                     }
                 })
                 .then(res => {
-                    console.log(res);
                 })
                 setIsReady(true);
             }
@@ -172,7 +164,6 @@ const PlannerPage = () => {
             } else {
                 // if it is not empty, update the trip name in the tripData object
                 tripData.tripName = tripName;
-                console.log(tripData);
                 // todo: update the trip name on the backend
                 axios.put(`http://localhost:8080/edittrip/${tripId}`,
                 tripData,
@@ -182,10 +173,8 @@ const PlannerPage = () => {
                     }
                 })
                 .then(res => {
-                    console.log(res);
                 })
                 .catch(err => {
-                    console.log(err);
                 })
                 setToggleEditName(false);
             }
@@ -207,7 +196,6 @@ const PlannerPage = () => {
         // ask the user if they are sure they want to delete the trip
         if (window.confirm("Are you sure you want to delete this trip?")) {
             // delete the trip from the backend
-            console.log("deleting trip");
             axios.delete(`http://localhost:8080/deletetrip/${tripId}`,
             {
                 headers: {
@@ -215,12 +203,10 @@ const PlannerPage = () => {
                 }
             })
             .then(res => {
-                console.log(res);
                 // redirect to the home page
                 window.location.href = "/";
             })
             .catch(err => {
-                console.log(err);
             })
         }
     }
@@ -236,8 +222,10 @@ const PlannerPage = () => {
                                 <input className="calendar__title" type="text" value={tripName} onChange={changeTripName}/>}
                                 <span onClick={toggleEditTripsName} className="calendar__edit"><img src="https://img.icons8.com/ios/50/000000/edit-file.png"/></span>
                             </div>
-                            <span onClick={addEvent} className="calendar__add"><img src="https://img.icons8.com/ios/50/000000/add--v1.png"/></span>
-                            <span onClick={deleteTrip} className="calendar__delete"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png"/></span>
+                            <div className="calendar__add-delete-wrap">
+                                <span onClick={addEvent} className="calendar__add"><img src="https://img.icons8.com/ios/50/000000/add--v1.png"/></span>
+                                <span onClick={deleteTrip} className="calendar__delete"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png"/></span>
+                            </div>
                         </div>
                         <div className="calendar__days">
                             { isReady ? 
