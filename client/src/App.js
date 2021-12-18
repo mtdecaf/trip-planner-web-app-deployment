@@ -32,7 +32,7 @@ function App() {
                 },
             }
             // if the token is valid, set the state to logged in
-            axios.get("http://localhost:8080/welcome", config)
+            axios.get("/welcome", config)
             .then(res => {
                 if (res.status === 200) {
                     setIsLoggedIn(true);

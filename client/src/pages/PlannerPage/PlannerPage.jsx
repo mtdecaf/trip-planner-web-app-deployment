@@ -71,7 +71,7 @@ const PlannerPage = () => {
                     }
                 }
                 setEvents(tripData.events);
-                axios.post(`http://localhost:8080/addevents/${tripId}`, tripData
+                axios.post(`/addevents/${tripId}`, tripData
                 , {
                     headers: {
                         "Authorization": `Bearer ${sessionStorage.getItem("token")}`
@@ -108,7 +108,7 @@ const PlannerPage = () => {
                 setEvents(tripData.events);
                 setDates(dateFrame);
                 // update the tripData on the backend
-                axios.post(`http://localhost:8080/addevents/${tripId}`, tripData
+                axios.post(`/addevents/${tripId}`, tripData
                 , {
                     headers: {
                         "Authorization": `Bearer ${sessionStorage.getItem("token")}`
@@ -165,7 +165,7 @@ const PlannerPage = () => {
                 // if it is not empty, update the trip name in the tripData object
                 tripData.tripName = tripName;
                 // todo: update the trip name on the backend
-                axios.put(`http://localhost:8080/edittrip/${tripId}`,
+                axios.put(`/edittrip/${tripId}`,
                 tripData,
                 {
                     headers: {
@@ -196,7 +196,7 @@ const PlannerPage = () => {
         // ask the user if they are sure they want to delete the trip
         if (window.confirm("Are you sure you want to delete this trip?")) {
             // delete the trip from the backend
-            axios.delete(`http://localhost:8080/deletetrip/${tripId}`,
+            axios.delete(`/deletetrip/${tripId}`,
             {
                 headers: {
                     "Authorization": `Bearer ${sessionStorage.getItem("token")}`
