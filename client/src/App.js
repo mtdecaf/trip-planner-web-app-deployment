@@ -55,7 +55,7 @@ function App() {
         }
         // repeat every time username, email, or trip data changes
     }, [username, email, tripData.length]);
-    console.log(process.env);
+
     return (
         <div className="App">
             <PageNav isLoggedIn={isLoggedIn} username={username} />

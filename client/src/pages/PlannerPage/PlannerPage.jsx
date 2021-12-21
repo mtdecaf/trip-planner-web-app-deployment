@@ -70,7 +70,13 @@ const PlannerPage = () => {
                         }
                     }
                 }
+
                 setEvents(tripData.events);
+                
+                // set the tripName to the tripData.tripName
+                console.log(tripData.tripName);
+                setTripName(tripData.tripName);
+
                 axios.post(`/addevents/${tripId}`, tripData
                 , {
                     headers: {
@@ -81,10 +87,10 @@ const PlannerPage = () => {
                 })
                 .catch(err => {
                 })
-                setIsReady(true);
-
                 // set the trip name for editing use
                 setTripName(tripData.tripName);
+
+                setIsReady(true);
             } else {
                 // populate the events with empty arrays for each date from the start date to the end date, including the start date and end date
                 let timeFrame = [];
@@ -107,6 +113,10 @@ const PlannerPage = () => {
                 tripData.events = blankEvents;
                 setEvents(tripData.events);
                 setDates(dateFrame);
+                
+                // set the trip name for editing use
+                setTripName(tripData.tripName);
+                
                 // update the tripData on the backend
                 axios.post(`/addevents/${tripId}`, tripData
                 , {
