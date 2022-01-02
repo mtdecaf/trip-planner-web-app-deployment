@@ -42,11 +42,13 @@ const PlannerPage = () => {
 
     // only do this when tripData is fetched from the server
     useEffect(() => {
+        console.log('useEffect triggered after tripData is updated')
         // check if the tripData is populated
         if (Object.keys(tripData).length > 0) {
             let dateFrame = [];
             // check if the tripData.events is populated
             if (tripData.events && Object.keys(tripData.events).length > 0) {
+                // the events are populated
                 // get the dates
                 let startDate = new Date(tripData.startDate);
                 let endDate = new Date(tripData.endDate);
@@ -74,7 +76,6 @@ const PlannerPage = () => {
                 setEvents(tripData.events);
                 
                 // set the tripName to the tripData.tripName
-                console.log(tripData.tripName);
                 setTripName(tripData.tripName);
 
                 axios.post(`/addevents/${tripId}`, tripData
@@ -89,9 +90,9 @@ const PlannerPage = () => {
                 })
                 // set the trip name for editing use
                 setTripName(tripData.tripName);
-
                 setIsReady(true);
             } else {
+                // the events are not populated
                 // populate the events with empty arrays for each date from the start date to the end date, including the start date and end date
                 let timeFrame = [];
                 let blankEvents = {};
@@ -249,7 +250,15 @@ const PlannerPage = () => {
                         </div>
                     </div>
                     {toggleAddEvent ? 
-                        <AddEventModal events={events} dates={dates} tripData={tripData} setTripData={setTripData} setToggleAddEvent={setToggleAddEvent}/>
+                        <AddEventModal 
+                        events={events} 
+                        dates={dates} 
+                        tripData={tripData} 
+                        setTripData={setTripData} 
+                        setToggleAddEvent={setToggleAddEvent} 
+                        isReady={isReady} 
+                        setIsReady={setIsReady} 
+                        />
                     : null}
                 </div>
                 : 

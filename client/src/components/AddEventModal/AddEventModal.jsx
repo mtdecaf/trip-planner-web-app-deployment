@@ -14,7 +14,8 @@ const AddEventModal = (props) => {
         e.preventDefault();
         // alert("Event added!");
         // get all the information from the form and validate it
-        const eventArray = Object.entries(props.events);
+        const eventArray = Object.entries(props.tripData.events);
+        console.log(eventArray);
         const form = e.target;
         const eventDay = form.eventDay.value;
 
@@ -40,8 +41,8 @@ const AddEventModal = (props) => {
         else if (form.startTime.value > form.endTime.value) {
             setErrorMessage("Please make sure the start time is before the end time.");
         } else {
-            const eventDate = props.dates[dayPosition];
             // get the year, month and day from the date and connect with -, inclued the 0 if the month or day is less than 10
+            const eventDate = props.dates[dayPosition];
             const year = eventDate.getFullYear();
             const month = eventDate.getMonth() + 1;
             const day = eventDate.getDate();
@@ -49,23 +50,24 @@ const AddEventModal = (props) => {
             const startTime = `${formattedDate}T${form.startTime.value}:00`;
             const endTime = `${formattedDate}T${form.endTime.value}:00`;
             // take all the data and target the item in events object and add it to the array
-            props.events[eventDay] = [
-                ...props.events[eventDay],                
-                {
-                    id: uuidv4(),
-                    type: eventType,
-                    description: eventDescription,
-                    name: `${eventType}: ${eventDescription} at ${eventLocation} cost $${price}`,
-                    location: eventLocation,
-                    startTime: startTime,
-                    endTime: endTime,
-                    price: price,
-                },
-            ];
-            console.log(props.events);
+            props.setTripData(
+                props.tripData.events[eventDay] = [
+                    ...props.tripData.events[eventDay],                
+                    {
+                        id: uuidv4(),
+                        type: eventType,
+                        description: eventDescription,
+                        name: `${eventType}: ${eventDescription} at ${eventLocation} costing $${price}`,
+                        location: eventLocation,
+                        startTime: startTime,
+                        endTime: endTime,
+                        price: price,
+                    }]
+            );
+            console.log(props.tripData.events);
             // post the new events data to the database just like the add event button
             axios.post(`/addevents/${tripId}`, {
-                events: props.events,
+                events: props.tripData.events,
             }, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -78,10 +80,20 @@ const AddEventModal = (props) => {
             .catch(err => {
                 console.log(err);
             })
-            props.tripData.events = props.events;
-            props.setTripData(props.tripData);
+            // formate the times to be in the date object format
+            // something's wrong here 
+            // why is props.tripData changed?
+            console.log(props.tripData);
+
+            // props.tripData.events = props.events;
+            // console.log(props.tripData);
+            // props.setTripData(props.tripData);
+            // console.log(props.tripData);
+            // props.setIsReady(false);
+
             // refresh the page
-            window.location.reload();
+            // window.location.reload();
+
             // close the modal
             props.setToggleAddEvent();
         }
@@ -98,7 +110,7 @@ const AddEventModal = (props) => {
                     <select className="add-event__select add-event__element add-event__input" name="eventDay" id="event-day">
                         <option value="">Select a day</option>
                         {
-                            Object.keys(props.events).map((day, index) => {
+                            Object.keys(props.tripData.events).map((day, index) => {
                                 return <option key={index} value={day}>{day}</option>
                             })
                         }
