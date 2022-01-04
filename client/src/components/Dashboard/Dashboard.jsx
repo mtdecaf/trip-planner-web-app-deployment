@@ -95,7 +95,13 @@ const Dashboard = (props) => {
             </div>
 
             {/* renders AddTripModal only if AddtripDisplay is True */}
-            {addTripDisplay ? <AddTripModal toggleAddTrip={toggleAddTrip} username={props.username} email={props.email} setTripData={setTripData} tripData={tripData} /> : null}
+            {addTripDisplay ? <AddTripModal 
+            toggleAddTrip={toggleAddTrip} 
+            username={props.username} 
+            email={props.email} 
+            setTripData={setTripData} 
+            tripData={tripData} 
+            /> : null}
         </div>
     )
 

@@ -48,8 +48,8 @@ const AddEventModal = (props) => {
             const startTime = `${formattedDate}T${form.startTime.value}:00`;
             const endTime = `${formattedDate}T${form.endTime.value}:00`;
 
-            // change the tripData's events object to include the new event in addition to the other properties
-            const newTripData = Object.assign(
+            // set the tripData to the new tripData with updated events on the eventDay
+            props.setTripData(Object.assign(
                 {},
                 {
                     ...props.tripData,
@@ -70,9 +70,7 @@ const AddEventModal = (props) => {
                         ],
                     }
                 }
-            );
-            // set the tripData to the new tripData with updated events on the eventDay with a new reference
-            props.setTripData(newTripData);
+            ));
             props.setIsReady(false);
 
             // close the modal

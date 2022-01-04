@@ -60,8 +60,19 @@ function App() {
         <div className="App">
             <PageNav isLoggedIn={isLoggedIn} username={username} />
             <Switch>
-                <Route exact path="/" render={() => <HomePage isLoggedIn={isLoggedIn} username={username} email={email} tripData={tripData} setTripData={setTripData} addTripDisplay={addTripDisplay} />} />
-                <Route path="/planner/:tripId" render={() => <PlannerPage isLoggedIn={isLoggedIn} username={username} email={email} tripData={tripData} />} />
+                <Route exact path="/" render={() => <HomePage 
+                isLoggedIn={isLoggedIn} 
+                username={username} 
+                email={email} 
+                tripData={tripData} 
+                setTripData={setTripData} 
+                addTripDisplay={addTripDisplay} />} />
+                <Route path="/planner/:tripId" render={() => <PlannerPage 
+                isLoggedIn={isLoggedIn} 
+                username={username} 
+                email={email} 
+                tripData={tripData} 
+                setTripData={setTripData} />} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/login" component={LogIn} />
             </Switch>

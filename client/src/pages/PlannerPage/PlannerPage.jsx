@@ -6,7 +6,7 @@ import axios from "../../middleware/axiosConfig";
 
 import AddEventModal from "../../components/AddEventModal/AddEventModal";
 
-const PlannerPage = () => {
+const PlannerPage = (props) => {
     const { tripId } = useParams()
     
     const [ dates, setDates ] = useState([]);
@@ -171,8 +171,16 @@ const PlannerPage = () => {
                 alert("Please enter a trip name");
             } else {
                 // if it is not empty, update the trip name in the tripData object
+                // set the tripData with the updated trip name
                 tripData.tripName = tripName;
-                // todo: update the trip name on the backend
+                props.setTripData(Object.assign(
+                    {},
+                    {
+                        ...props.tripData,
+                        tripName: tripName
+                    }
+                ));
+                // update the trip name on the backend
                 axios.put(`/edittrip/${tripId}`,
                 tripData,
                 {
