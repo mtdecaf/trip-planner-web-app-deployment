@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import "./AddEventModal.scss";
 
 const AddEventModal = (props) => {
-    console.log(props);
     const { tripId } = useParams()
 
     const [errorMessage, setErrorMessage] = useState("")
@@ -15,7 +14,6 @@ const AddEventModal = (props) => {
         // alert("Event added!");
         // get all the information from the form and validate it
         const eventArray = Object.entries(props.tripData.events);
-        console.log(eventArray);
         const form = e.target;
         const eventDay = form.eventDay.value;
 
@@ -25,6 +23,7 @@ const AddEventModal = (props) => {
         const eventDescription = form.eventDescription.value;
         const eventLocation = form.eventLocation.value;
         const price = form.price.value;
+
         // validate all the fields are filled out
         if (
             !eventDay ||
@@ -37,8 +36,8 @@ const AddEventModal = (props) => {
         ) {
             setErrorMessage("Please fill out all the fields.");
         }
-        // the start time must be before the end time
         else if (form.startTime.value > form.endTime.value) {
+            // the start time must be before the end time
             setErrorMessage("Please make sure the start time is before the end time.");
         } else {
             // get the year, month and day from the date and connect with -, inclued the 0 if the month or day is less than 10
@@ -49,50 +48,33 @@ const AddEventModal = (props) => {
             const formattedDate = `${year}-${month < 10 ? "0" + month : month}-${day < 10 ? "0" + day : day}`;
             const startTime = `${formattedDate}T${form.startTime.value}:00`;
             const endTime = `${formattedDate}T${form.endTime.value}:00`;
-            // take all the data and target the item in events object and add it to the array
-            props.setTripData(
-                props.tripData.events[eventDay] = [
-                    ...props.tripData.events[eventDay],                
-                    {
-                        id: uuidv4(),
-                        type: eventType,
-                        description: eventDescription,
-                        name: `${eventType}: ${eventDescription} at ${eventLocation} costing $${price}`,
-                        location: eventLocation,
-                        startTime: startTime,
-                        endTime: endTime,
-                        price: price,
-                    }]
-            );
-            console.log(props.tripData.events);
-            // post the new events data to the database just like the add event button
-            axios.post(`/addevents/${tripId}`, {
-                events: props.tripData.events,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                    'Content-Type': 'application/JSON'
+
+            // change the tripData's events object to include the new event in addition to the other properties
+            const newTripData = Object.assign(
+                {},
+                {
+                    ...props.tripData,
+                    events: {
+                        ...props.tripData.events,
+                        [eventDay]: [
+                            ...props.tripData.events[eventDay],
+                            {
+                                id: uuidv4(),
+                                type: eventType,
+                                description: eventDescription,
+                                name: `${eventType}: ${eventDescription} at ${eventLocation} costing $${price}`,
+                                location: eventLocation,
+                                startTime: startTime,
+                                endTime: endTime,
+                                price: price,
+                            },
+                        ],
+                    }
                 }
-            })
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            // formate the times to be in the date object format
-            // something's wrong here 
-            // why is props.tripData changed?
-            console.log(props.tripData);
-
-            // props.tripData.events = props.events;
-            // console.log(props.tripData);
-            // props.setTripData(props.tripData);
-            // console.log(props.tripData);
-            // props.setIsReady(false);
-
-            // refresh the page
-            // window.location.reload();
+            );
+            // set the tripData to the new tripData with updated events on the eventDay with a new reference
+            props.setTripData(newTripData);
+            props.setIsReady(false);
 
             // close the modal
             props.setToggleAddEvent();

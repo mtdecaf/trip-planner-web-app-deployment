@@ -42,7 +42,6 @@ const PlannerPage = () => {
 
     // only do this when tripData is fetched from the server
     useEffect(() => {
-        console.log('useEffect triggered after tripData is updated')
         // check if the tripData is populated
         if (Object.keys(tripData).length > 0) {
             let dateFrame = [];
@@ -61,9 +60,9 @@ const PlannerPage = () => {
                 }
                 setDates(dateFrame);
 
-                // go through the tripData.events object, find the populated arrays, and change the startTime and endTime to Date objects
+                // go through the tripData.events object
                 for (const key in tripData.events) {
-                    // check if the array is populated
+                    // check if the populated arrays, and change the startTime and endTime to Date objects if the startTime or endTime are also strings
                     if (tripData.events[key].length > 0) {
                         // loop through the array, and change the startTime and endTime to Date objects
                         for (let i = 0; i < tripData.events[key].length; i++) {
@@ -77,17 +76,14 @@ const PlannerPage = () => {
                 
                 // set the tripName to the tripData.tripName
                 setTripName(tripData.tripName);
-
                 axios.post(`/addevents/${tripId}`, tripData
                 , {
                     headers: {
                         "Authorization": `Bearer ${sessionStorage.getItem("token")}`
                     }
                 })
-                .then(res => {
-                })
-                .catch(err => {
-                })
+                .then()
+                .catch()
                 // set the trip name for editing use
                 setTripName(tripData.tripName);
                 setIsReady(true);
@@ -131,6 +127,7 @@ const PlannerPage = () => {
             }
         }
     }, [tripData])
+
     const convertDay = (day) => {
         // convert the day number to monday, tuesday, etc.
         switch (day) {
