@@ -11,7 +11,6 @@ const AddEventModal = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // alert("Event added!");
         // get all the information from the form and validate it
         const eventArray = Object.entries(props.tripData.events);
         const form = e.target;
