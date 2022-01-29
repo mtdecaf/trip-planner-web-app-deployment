@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "../../middleware/axiosConfig";
 import "./LogIn.scss";
 
@@ -57,7 +57,7 @@ const LogIn = () => {
                     {errorMessage && <p className="log-in__error">{errorMessage}</p>}
                     <input className="log-in__form-button" type="submit" value="Sign Up" />
                     {/* if the user is logged in, redirect to the home page */}
-                    {isloggedIn ? <Redirect to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />}
+                    {isloggedIn ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />}
                 </form>
             </div>
         </div>
