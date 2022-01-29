@@ -12,7 +12,7 @@
     }
     &__wrap{
         background-color: white;
-        height: 20rem;
+        height: 24rem;
         margin-top:7rem;
         width: 80%;
         border-radius: 25px;
@@ -47,6 +47,7 @@
         &-label{
             margin: 0.05rem 0;
             text-align: start;
+            font-weight: 600;
             @include tablet{
                 margin: 0.1rem 0;
             }

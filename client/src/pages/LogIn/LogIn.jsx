@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "../../middleware/axiosConfig";
 import "./LogIn.scss";
 
@@ -50,14 +50,14 @@ const LogIn = () => {
             <div className="log-in__wrap">
                 <h1 className="log-in__title">Log In</h1>
                 <form className="log-in__form" onSubmit={handleSubmit}>
-                    <label className="log-in__form-label">email:</label>
+                    <label className="log-in__form-label">Email:</label>
                     <input className="log-in__form-input" type="text" name="email" onChange={handleChange} value={user.email} />
-                    <label className="log-in__form-label">password:</label>
+                    <label className="log-in__form-label">Password:</label>
                     <input className="log-in__form-input" type="password" name="password" onChange={handleChange} value={user.password} />
                     {errorMessage && <p className="log-in__error">{errorMessage}</p>}
-                    <input className="log-in__form-button" type="submit" value="Sign Up" />
                     {/* if the user is logged in, redirect to the home page */}
                     {isloggedIn ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />}
+                    <Link to="/" className="log-in__form-button">Cancel</Link>
                 </form>
             </div>
         </div>

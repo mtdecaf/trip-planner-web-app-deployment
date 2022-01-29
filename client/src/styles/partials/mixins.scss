@@ -54,9 +54,6 @@
         background-color: $primary-red;
         color: $text-light;
     }
-    @include tablet{
-        margin: 0.75rem 0;
-    }
 }
 // error styling
 @mixin error-styling {

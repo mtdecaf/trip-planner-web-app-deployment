@@ -1,5 +1,6 @@
 import axios from "../../middleware/axiosConfig";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./SignUp.scss";
 
@@ -82,6 +83,7 @@ const UserAuth = () => {
                     <input className="sign-up__form-input" type="password" name="passwordConfirmation" id="passwordConfirmation" onChange={handleChange} />
                     {errorMessage && <p className="sign-up__error">{errorMessage}</p>}
                     <input className="sign-up__form-button" type="submit" value="Sign Up" />
+                    <Link to="/" className="log-in__form-button">Cancel</Link>
                 </form>
             </div>
         </div>
