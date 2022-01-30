@@ -1,12 +1,8 @@
-import axios from "../../middleware/axiosConfig";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import "./AddEventModal.scss";
 
 const AddEventModal = (props) => {
-    const { tripId } = useParams()
-
     const [errorMessage, setErrorMessage] = useState("")
 
     const handleSubmit = (e) => {

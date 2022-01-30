@@ -35,7 +35,7 @@ const PageNav = (props) => {
                 </div>
                 <div className="page-nav__profile">
                     <Link to="/" className="page-nav__username page-nav__button">{props.username}</Link>
-                    <a onClick={logOut} className="page-nav__log-out page-nav__button">Log Out</a>
+                    <Link to="/" onClick={logOut} className="page-nav__log-out page-nav__button">Log Out</Link>
                 </div>
             </div>
         );

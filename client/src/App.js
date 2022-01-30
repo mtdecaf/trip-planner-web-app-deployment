@@ -19,7 +19,7 @@ function App() {
     const [tripData, setTripData] = useState([]);
 
     // add trip display state
-    const [addTripDisplay, setAddTripDisplay] = useState(false);
+    const [addTripDisplay] = useState(false);
 
     // when the page loads, validate that the jwt token from local storage is valid, if it is, set the state to logged in, if not, set the state to logged out
     const token = sessionStorage.getItem("token");
@@ -54,7 +54,7 @@ function App() {
         } else {
         }
         // repeat every time username, email, or trip data changes
-    }, [username, email, tripData.length]);
+    }, [username, email, tripData]);
 
     return (
         <div className="App">
