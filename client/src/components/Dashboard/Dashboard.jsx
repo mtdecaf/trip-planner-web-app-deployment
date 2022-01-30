@@ -1,10 +1,13 @@
 import "./Dashboard.scss"
 import { useState, useEffect } from "react";
+import ReactMapGL from 'react-map-gl';
 
+// imported components
 import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
 
-const Dashboard = (props) => {
+const Dashboard = (props, mapboxApiAccessToken) => {
+
     // states that handle components displayed in mobile view
     const [dashboardDisplay, setDashboardDisplay] = useState(true);
     const [dashboardDisplayMobile, setDashboardDisplayMobile] = useState(false);
@@ -13,6 +16,17 @@ const Dashboard = (props) => {
     const [sideBarDisplayMobile, setSideBarDisplayMobile] = useState(true);
 
     const [addTripDisplay, setAddTripDisplay] = useState(props.addTripDisplay);
+
+    // state that handle the map viewport
+    const [viewport, setViewport] = useState({
+        // set width and height of map
+        width: "calc(100vw - 20rem)",
+        height: "calc(100vh - 4.2rem);",
+        // set the initial viewport to Vancouver
+        latitude: 49.2827,
+        longitude: -123.1207,
+        zoom: 10
+      });
 
     // update the trip data on mount
     useEffect(() => {
@@ -50,27 +64,7 @@ const Dashboard = (props) => {
 
     return(
         <div className="dashboard">
-            <div className={`dashboard__content ${dashboardDisplay ? "": "dashboard__element--hidden"}`}>
-                <h1 className="dashboard__title">User Dashboard</h1>
-                <div className="dashboard__content-grid">
-                    <div className="dashboard__card dashboard__trip-history">
-                        <h2 className="dashboard__trip-history__title">Past Trips</h2>
-                        <p>No Trips To Display</p>
-                    </div>
-                    <div className="dashboard__card dashboard__total-trips">
-                        <h2 className="dashboard__total-trips__title">Total Time Traveling</h2>
-                        <p>Finish A Plan To Update</p>
-                    </div>
-                    <div className="dashboard__card dashboard__activities">
-                        <h2 className="dashboard__activities__title">Activities</h2>
-                        <p>No Activities To Display</p>
-                    </div>
-                    <div className="dashboard__card dashboard__friends">
-                        <h2 className="dashboard__friends__title">Friend List</h2>
-                        <p>No Friends To Display</p>
-                    </div>
-                </div>
-            </div>
+            <ReactMapGL {...viewport} onViewportChange={nextViewport => setViewport(nextViewport)} mapboxApiAccessToken={"pk.eyJ1IjoibXRkZWNhZiIsImEiOiJja3djdzBseDAwNXdhMndxc3ptZHcweDFxIn0.kJIv3Ieea1G90bztc3vJUA"} />
 
             <div className={`dashboard__side-bar ${sideBarDisplay ? "": "dashboard__element--hidden"}`}>
                 <h1 className="side-bar__title">Trips</h1>
