@@ -38,7 +38,7 @@ const PlannerPage = (props) => {
         })
         .catch(err => {
         })
-    }, [])
+    }, [tripId])
 
     // only do this when tripData is fetched from the server
     useEffect(() => {
@@ -126,7 +126,7 @@ const PlannerPage = (props) => {
                 setIsReady(true);
             }
         }
-    }, [tripData])
+    }, [tripId, tripData])
 
     const convertDay = (day) => {
         // convert the day number to monday, tuesday, etc.

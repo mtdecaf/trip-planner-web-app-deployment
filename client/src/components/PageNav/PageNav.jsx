@@ -7,7 +7,6 @@ import "./PageNav.scss";
 
 const PageNav = (props) => {
     const { pathname } = useLocation();
-    console.log(pathname);
     // log out function
     const logOut = () => {
         sessionStorage.removeItem("token");
