@@ -73,7 +73,7 @@ const AddTripModal = (props) => {
     if (tripName){
         if (startLocation && endLocation && tripName.value === `${startLocation} + ' to ' + ${endLocation}`) {
             // if the user manually changes the trip name, the value of the trip name will be the value of the input and not the start and end location
-            if (tripName.value != startLocation + ' to ' + endLocation) {
+            if (tripName.value !== startLocation + ' to ' + endLocation) {
                 tripName.value = startLocation + ' to ' + endLocation;
                 return;
             } else {

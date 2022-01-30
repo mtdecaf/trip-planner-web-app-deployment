@@ -21,7 +21,7 @@ const Dashboard = (props, mapboxApiAccessToken) => {
     const [viewport, setViewport] = useState({
         // set width and height of map
         width: "calc(100vw - 20rem)",
-        height: "calc(100vh - 4.2rem);",
+        height: "calc(100vh - 4.2rem)",
         // set the initial viewport to Vancouver
         latitude: 49.2827,
         longitude: -123.1207,
@@ -69,7 +69,7 @@ const Dashboard = (props, mapboxApiAccessToken) => {
             <div className={`dashboard__side-bar ${sideBarDisplay ? "": "dashboard__element--hidden"}`}>
                 <h1 className="side-bar__title">Trips</h1>
                 {/* add new tripcard */}
-                <span onClick={toggleAddTrip} className="side-bar__add-new"><img src="https://img.icons8.com/ios-glyphs/30/000000/plus-2-math.png"/></span>
+                <span onClick={toggleAddTrip} className="side-bar__add-new"><img src="https://img.icons8.com/ios-glyphs/30/000000/plus-2-math.png" alt="add a trip button"/></span>
                 {/* trip cards; map it out using the data */}
                 <div className="trip-card">
                     {tripData ? tripData.map((trip, index) =>

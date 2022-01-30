@@ -236,11 +236,11 @@ const PlannerPage = (props) => {
                             <div className="calendar__name-wrap">
                                 {!toggleEditName ? <h1 className="calendar__title">{tripData.tripName}</h1>:
                                 <input className="calendar__title" type="text" value={tripName} onChange={changeTripName}/>}
-                                <span onClick={toggleEditTripsName} className="calendar__edit"><img src="https://img.icons8.com/ios/50/000000/edit-file.png"/></span>
+                                <span onClick={toggleEditTripsName} className="calendar__edit"><img src="https://img.icons8.com/ios/50/000000/edit-file.png" alt="edit trip name button"/></span>
                             </div>
                             <div className="calendar__add-delete-wrap">
-                                <span onClick={addEvent} className="calendar__add"><img src="https://img.icons8.com/ios/50/000000/add--v1.png"/></span>
-                                <span onClick={deleteTrip} className="calendar__delete"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png"/></span>
+                                <span onClick={addEvent} className="calendar__add"><img src="https://img.icons8.com/ios/50/000000/add--v1.png" alt="add event button"/></span>
+                                <span onClick={deleteTrip} className="calendar__delete"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png" alt="delete current trip button"/></span>
                             </div>
                         </div>
                         <div className="calendar__days">
