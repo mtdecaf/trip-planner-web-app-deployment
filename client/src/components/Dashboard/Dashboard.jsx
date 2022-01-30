@@ -5,8 +5,10 @@ import ReactMapGL from 'react-map-gl';
 // imported components
 import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
+import Config from "../../config.json";
 
-const Dashboard = (props, mapboxApiAccessToken) => {
+const Dashboard = (props) => {
+    const mapboxApiAccessToken = Config.MAPBOX_API_ACCESS_TOKEN;
 
     // states that handle components displayed in mobile view
     const [dashboardDisplay, setDashboardDisplay] = useState(true);
@@ -64,7 +66,7 @@ const Dashboard = (props, mapboxApiAccessToken) => {
 
     return(
         <div className="dashboard">
-            <ReactMapGL {...viewport} onViewportChange={nextViewport => setViewport(nextViewport)} mapboxApiAccessToken={"pk.eyJ1IjoibXRkZWNhZiIsImEiOiJja3djdzBseDAwNXdhMndxc3ptZHcweDFxIn0.kJIv3Ieea1G90bztc3vJUA"} />
+            <ReactMapGL {...viewport} onViewportChange={nextViewport => setViewport(nextViewport)} mapboxApiAccessToken={mapboxApiAccessToken} />
 
             <div className={`dashboard__side-bar ${sideBarDisplay ? "": "dashboard__element--hidden"}`}>
                 <h1 className="side-bar__title">Trips</h1>
