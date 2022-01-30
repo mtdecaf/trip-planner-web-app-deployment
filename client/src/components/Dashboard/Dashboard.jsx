@@ -31,7 +31,7 @@ const Dashboard = (props, mapboxApiAccessToken) => {
     // update the trip data on mount
     useEffect(() => {
         props.setTripData(props.tripData);
-    }, [props.tripData]);
+    }, [props]);
     
     const [tripData, setTripData] = useState();
     useEffect(() => {

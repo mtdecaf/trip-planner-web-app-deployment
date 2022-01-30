@@ -51,10 +51,9 @@ function App() {
             .then(res => {
                 setTripData(res.data);
             })
-        } else {
         }
-        // repeat every time username, email, or trip data changes
-    }, [username, email, tripData]);
+        // repeat every time token updates
+    }, [token]);
 
     return (
         <div className="App">
