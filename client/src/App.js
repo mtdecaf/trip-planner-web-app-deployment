@@ -38,17 +38,19 @@ function App() {
                     setIsLoggedIn(true);
                     setUserName(res.data.username);
                     setEmail(res.data.email);
-                } else {
-                    setIsLoggedIn(false);
                 }
             })
             .catch(err => {
                 setIsLoggedIn(false);
+                sessionStorage.removeItem("token");
             })
             // get the trip data from the server
             axios.get("/gettrip", config)
             .then(res => {
                 setTripData(res.data);
+            })
+            .catch(err => {
+                sessionStorage.removeItem("token");
             })
         }
     }, [token]);
