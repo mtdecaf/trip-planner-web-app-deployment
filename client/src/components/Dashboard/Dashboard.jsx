@@ -1,15 +1,14 @@
 import "./Dashboard.scss"
 import { useState, useEffect } from "react";
 import ReactMapGL from 'react-map-gl';
+import axios from "../../middleware/axiosConfig";
 
 // imported components
 import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
-import Config from "../../config.json";
 
 const Dashboard = (props) => {
-    const mapboxApiAccessToken = Config.MAPBOX_API_ACCESS_TOKEN;
-
+    const [mapApiToken, setMapApiToken] = useState();
     // states that handle components displayed in mobile view
     const [dashboardDisplay, setDashboardDisplay] = useState(true);
     const [dashboardDisplayMobile, setDashboardDisplayMobile] = useState(false);
@@ -40,6 +39,17 @@ const Dashboard = (props) => {
         setTripData(props.tripData);
     }, [props.tripData]);
 
+    // get the map token from the backend
+    useEffect(() => {
+        axios.get("/mapToken")
+        .then(res => {
+            setMapApiToken(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }, []);
+
     const toggleDisplay = () => {
         if (dashboardDisplay) {
             setDashboardDisplay(false);
@@ -66,7 +76,7 @@ const Dashboard = (props) => {
 
     return(
         <div className="dashboard">
-            <ReactMapGL {...viewport} onViewportChange={nextViewport => setViewport(nextViewport)} mapboxApiAccessToken={mapboxApiAccessToken} />
+            {mapApiToken ? <ReactMapGL {...viewport} onViewportChange={nextViewport => setViewport(nextViewport)} mapboxApiAccessToken={mapApiToken} />: null}
 
             <div className={`dashboard__side-bar ${sideBarDisplay ? "": "dashboard__element--hidden"}`}>
                 <h1 className="side-bar__title">Trips</h1>

@@ -46,13 +46,11 @@ function App() {
                 setIsLoggedIn(false);
             })
             // get the trip data from the server
-            // pass the user email to the server
             axios.get("/gettrip", config)
             .then(res => {
                 setTripData(res.data);
             })
         }
-        // repeat every time token updates
     }, [token]);
 
     return (

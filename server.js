@@ -17,6 +17,8 @@ const deleteTripRoute = require('./server/routes/DeleteTripRoute');
 
 const addEventsRoute = require('./server/routes/AddEventsRoute');
 
+const MapDataRoute = require('./server/routes/MapDataRoute');
+
 // authorization middleware
 const TokenAuth = require('./server/routes/TokenAuth');
 
@@ -29,15 +31,6 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors())
 
-
-// connect to the database
-// mongoose.mongodb = mongoose.connect('mongodb://localhost:27017/userInfo')
-//     .then(() => {
-//         console.log('Connected to the local database');
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
 mongoose.mongodb = mongoose.connect(`mongodb+srv://mtdecaf:${password}@userinfo.bsbxr.mongodb.net/userInfo?retryWrites=true&w=majority`); 
 
 
@@ -53,14 +46,16 @@ app.use('/edittrip', editTripRoute);
 app.use('/deletetrip', deleteTripRoute);
 
 // events routes
-app.use('/addevents', addEventsRoute)
-
+app.use('/addevents', addEventsRoute);
 
 // middleware to handle token verification after logging in
 app.use("/welcome", TokenAuth);
 
+// map routes
+app.use("/mapToken", MapDataRoute);
+
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, "client", "build")))
+    app.use(express.static(path.join(__dirname, "client", "build")));
     app.get("*", (req, res) => {
         res.sendFile(path.join(__dirname, "client", "build", "index.html"));
     });
