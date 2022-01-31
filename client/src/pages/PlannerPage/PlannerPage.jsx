@@ -166,10 +166,8 @@ const PlannerPage = (props) => {
     const toggleEditTripsName = (e) => {
         if (toggleEditName) {
             // check if the trip name is empty
-            if (tripName === "") {
+            if (tripName) {
                 // if it is empty, return an error
-                alert("Please enter a trip name");
-            } else {
                 // if it is not empty, update the trip name in the tripData object
                 // set the tripData with the updated trip name
                 tripData.tripName = tripName;
@@ -193,7 +191,10 @@ const PlannerPage = (props) => {
                 .catch(err => {
                 })
                 setToggleEditName(false);
+            } else {
+                alert("Please enter a trip name");
             }
+
         } else {
             setToggleEditName(true);
         }

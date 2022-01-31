@@ -10,7 +10,7 @@ import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const Dashboard = (props) => {
     console.log(props);

@@ -19,8 +19,7 @@ const PageNav = (props) => {
         } else if (pathname === "/login") {
             document.getElementById("login").classList.add("page-nav__button--active");
             document.getElementById("signup").classList.remove("page-nav__button--active");
-        } else {
-            // if the class exists, remove it
+        } else if (document.getElementById("login")) {
             if (document.getElementById("login").classList.contains("page-nav__button--active")) {
                 document.getElementById("login").classList.remove("page-nav__button--active");
             }

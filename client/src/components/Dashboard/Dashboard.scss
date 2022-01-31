@@ -52,7 +52,6 @@
             position: fixed;
             bottom: 0;
             margin: 0 auto;
-
         }
     }
 }
@@ -63,5 +62,8 @@
 .side-bar{
     &__title{
         margin: 0.75rem;
+    }
+    &__add-new{
+        cursor: pointer;
     }
 }
