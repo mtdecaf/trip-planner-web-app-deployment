@@ -1,11 +1,16 @@
 import "./Dashboard.scss"
 import { useState, useEffect } from "react";
 import ReactMapGL from 'react-map-gl';
+import mapboxgl from 'mapbox-gl';
+
 import axios from "../../middleware/axiosConfig";
 
 // imported components
 import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const Dashboard = (props) => {
     const [mapApiToken, setMapApiToken] = useState();
