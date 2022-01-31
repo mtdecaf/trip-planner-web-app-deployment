@@ -38,6 +38,8 @@
         background-color: $dark-beige;
         width: 100vw;
         height: calc(100vh - 6.5rem);
+        position: absolute;
+        right: 0;
         @include tablet{
             height: calc(100vh - 4.2rem);
             display: inline-block;

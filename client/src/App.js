@@ -16,7 +16,7 @@ function App() {
     const [email, setEmail] = useState("");
 
     // trip info state
-    const [tripData, setTripData] = useState([]);
+    const [tripData, setTripData] = useState();
 
     // add trip display state
     const [addTripDisplay] = useState(false);
@@ -47,6 +47,7 @@ function App() {
             // get the trip data from the server
             axios.get("/gettrip", config)
             .then(res => {
+                console.log(res.data);
                 setTripData(res.data);
             })
             .catch(err => {
@@ -54,7 +55,7 @@ function App() {
             })
         }
     }, [token]);
-
+    console.log(tripData);
     return (
         <div className="App">
             <PageNav isLoggedIn={isLoggedIn} username={username} />

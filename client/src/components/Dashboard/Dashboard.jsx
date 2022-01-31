@@ -10,9 +10,10 @@ import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const Dashboard = (props) => {
+    console.log(props);
     const [mapApiToken, setMapApiToken] = useState();
     // states that handle components displayed in mobile view
     const [dashboardDisplay, setDashboardDisplay] = useState(true);
@@ -34,15 +35,6 @@ const Dashboard = (props) => {
         zoom: 10
       });
 
-    // update the trip data on mount
-    useEffect(() => {
-        props.setTripData(props.tripData);
-    }, [props]);
-    
-    const [tripData, setTripData] = useState();
-    useEffect(() => {
-        setTripData(props.tripData);
-    }, [props.tripData]);
 
     // get the map token from the backend
     useEffect(() => {
@@ -89,7 +81,7 @@ const Dashboard = (props) => {
                 <span onClick={toggleAddTrip} className="side-bar__add-new"><img src="https://img.icons8.com/ios-glyphs/30/000000/plus-2-math.png" alt="add a trip button"/></span>
                 {/* trip cards; map it out using the data */}
                 <div className="trip-card">
-                    {tripData ? tripData.map((trip, index) =>
+                    {props.tripData ? props.tripData.map((trip, index) =>
                         <TripCard 
                         key={index} 
                         tripData={trip}
@@ -110,8 +102,8 @@ const Dashboard = (props) => {
             toggleAddTrip={toggleAddTrip} 
             username={props.username} 
             email={props.email} 
-            setTripData={setTripData} 
-            tripData={tripData} 
+            setTripData={props.setTripData} 
+            tripData={props.tripData} 
             /> : null}
         </div>
     )

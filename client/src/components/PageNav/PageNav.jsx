@@ -20,8 +20,13 @@ const PageNav = (props) => {
             document.getElementById("login").classList.add("page-nav__button--active");
             document.getElementById("signup").classList.remove("page-nav__button--active");
         } else {
-            document.getElementById("login").classList.remove("page-nav__button--active");
-            document.getElementById("signup").classList.remove("page-nav__button--active");
+            // if the class exists, remove it
+            if (document.getElementById("login").classList.contains("page-nav__button--active")) {
+                document.getElementById("login").classList.remove("page-nav__button--active");
+            }
+            if (document.getElementById("signup").classList.contains("page-nav__button--active")) {
+                document.getElementById("signup").classList.remove("page-nav__button--active");
+            }
         }
     }, [pathname]);
     // if the user is not logged in, show the sign up & login button

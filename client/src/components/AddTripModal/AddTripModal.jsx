@@ -27,7 +27,7 @@ const AddTripModal = (props) => {
             button.disabled = true;
         }
         setDate(currentDate);
-    }, [date, endLocation, startLocation, tripName.value]);
+    }, []);
 
     const handleDateSelection = (e) => {
         setDate(e);
