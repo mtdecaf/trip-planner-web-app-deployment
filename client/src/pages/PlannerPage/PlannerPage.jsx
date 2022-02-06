@@ -13,8 +13,6 @@ const PlannerPage = (props) => {
 
     const [currentTripData, setCurrentTripData] = useState();
 
-    const [events, setEvents] = useState();
-
     const [toggleAddEvent, setToggleAddEvent] = useState(false);
     const [toggleEditName, setToggleEditName] = useState(false);
 
@@ -33,8 +31,7 @@ const PlannerPage = (props) => {
         .then(res => {
             setCurrentTripData(res.data);
         })
-        .catch(err => {
-        })
+        .catch()
     }, [tripId])
 
     // only do this when currentTripData is fetched from the server
@@ -68,7 +65,7 @@ const PlannerPage = (props) => {
                         }
                     }
                 }
-                setEvents(currentTripData.events);
+                console.log("currentTripData.events: ", currentTripData.events);
                 
                 axios.post(`/addevents/${tripId}`, currentTripData
                 , {
@@ -99,8 +96,10 @@ const PlannerPage = (props) => {
                 timeFrame.forEach(date => {
                     blankEvents[date] = [];
                 })
-                currentTripData.events = blankEvents;
-                setEvents(currentTripData.events);
+                setCurrentTripData(
+                    {...currentTripData,
+                    events: blankEvents}
+                );
                 setDates(dateFrame);
                 
                 // update the tripData on the backend
@@ -164,7 +163,6 @@ const PlannerPage = (props) => {
                     ...currentTripData,
                     tripName: currentTripData.tripName
                 });
-                console.log(currentTripData);
                 setToggleEditName(false);
             } else {
                 alert("Please enter a trip name");
@@ -177,7 +175,7 @@ const PlannerPage = (props) => {
     }
     useEffect(() => {
         if (currentTripData){
-            console.log(currentTripData);
+            console.log("currentTripData: ", currentTripData);
             axios.put(`/edittrip/${tripId}`,
             currentTripData,
             {
@@ -251,7 +249,7 @@ const PlannerPage = (props) => {
                     </div>
                     {toggleAddEvent ? 
                         <AddEventModal 
-                        events={events} 
+                        events={currentTripData.events} 
                         dates={dates} 
                         currentTripData={currentTripData} 
                         setCurrentTripData={setCurrentTripData} 

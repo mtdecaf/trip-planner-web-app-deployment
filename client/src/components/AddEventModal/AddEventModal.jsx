@@ -4,11 +4,10 @@ import "./AddEventModal.scss";
 
 const AddEventModal = (props) => {
     const [errorMessage, setErrorMessage] = useState("")
-
     const handleSubmit = (e) => {
         e.preventDefault();
         // get all the information from the form and validate it
-        const eventArray = Object.entries(props.tripData.events);
+        const eventArray = Object.entries(props.currentTripData.events);
         const form = e.target;
         const eventDay = form.eventDay.value;
 
@@ -45,14 +44,14 @@ const AddEventModal = (props) => {
             const endTime = `${formattedDate}T${form.endTime.value}:00`;
 
             // set the tripData to the new tripData with updated events on the eventDay
-            props.setTripData(Object.assign(
+            props.setCurrentTripData(Object.assign(
                 {},
                 {
-                    ...props.tripData,
+                    ...props.currentTripData,
                     events: {
-                        ...props.tripData.events,
+                        ...props.currentTripData.events,
                         [eventDay]: [
-                            ...props.tripData.events[eventDay],
+                            ...props.currentTripData.events[eventDay],
                             {
                                 id: uuidv4(),
                                 type: eventType,
@@ -85,7 +84,7 @@ const AddEventModal = (props) => {
                     <select className="add-event__select add-event__element add-event__input" name="eventDay" id="event-day">
                         <option value="">Select a day</option>
                         {
-                            Object.keys(props.tripData.events).map((day, index) => {
+                            Object.keys(props.currentTripData.events).map((day, index) => {
                                 return <option key={index} value={day}>{day}</option>
                             })
                         }
