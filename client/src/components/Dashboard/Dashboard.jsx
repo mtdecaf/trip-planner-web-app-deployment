@@ -13,7 +13,6 @@ import TripCard from "../TripCard/TripCard";
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const Dashboard = (props) => {
-    console.log("Dashboard props: ", props);
     const [mapApiToken, setMapApiToken] = useState();
     // states that handle components displayed in mobile view
     const [dashboardDisplay, setDashboardDisplay] = useState(true);
@@ -41,9 +40,7 @@ const Dashboard = (props) => {
         .then(res => {
             setMapApiToken(res.data);
         })
-        .catch(err => {
-            console.log(err);
-        });
+        .catch();
     }, []);
 
     const toggleDisplay = () => {

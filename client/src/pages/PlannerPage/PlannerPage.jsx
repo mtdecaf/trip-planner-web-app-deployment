@@ -65,7 +65,6 @@ const PlannerPage = (props) => {
                         }
                     }
                 }
-                console.log("currentTripData.events: ", currentTripData.events);
                 
                 axios.post(`/addevents/${tripId}`, currentTripData
                 , {
@@ -163,6 +162,18 @@ const PlannerPage = (props) => {
                     ...currentTripData,
                     tripName: currentTripData.tripName
                 });
+                props.setTripData(
+                    // find the trip in the tripData array according to the tripId
+                    props.tripData.map(trip => {
+                        if (trip.tripId === tripId) {
+                            return {
+                                ...trip,
+                                tripName: currentTripData.tripName
+                            }
+                        }
+                        return trip;
+                    })
+                )
                 setToggleEditName(false);
             } else {
                 alert("Please enter a trip name");
@@ -173,9 +184,9 @@ const PlannerPage = (props) => {
             setToggleEditName(true);
         }
     }
+    // update the currentTripData object
     useEffect(() => {
         if (currentTripData){
-            console.log("currentTripData: ", currentTripData);
             axios.put(`/edittrip/${tripId}`,
             currentTripData,
             {
@@ -183,12 +194,8 @@ const PlannerPage = (props) => {
                     "Authorization": `Bearer ${sessionStorage.getItem("token")}`
                 }
             })
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            .then()
+            .catch()
         }
     }, [currentTripData])
 
