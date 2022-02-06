@@ -11,7 +11,7 @@ const PlannerPage = (props) => {
     
     const [ dates, setDates ] = useState([]);
 
-    const [tripData, setTripData] = useState({});
+    const [currentTripData, setCurrentTripData] = useState();
 
     const [events, setEvents] = useState();
 
@@ -34,23 +34,23 @@ const PlannerPage = (props) => {
             }
         })
         .then(res => {
-            setTripData(res.data);
+            setCurrentTripData(res.data);
         })
         .catch(err => {
         })
     }, [tripId])
 
-    // only do this when tripData is fetched from the server
+    // only do this when currentTripData is fetched from the server
     useEffect(() => {
-        // check if the tripData is populated
-        if (Object.keys(tripData).length > 0) {
+        // check if the currentTripData is populated
+        if (currentTripData && Object.keys(currentTripData).length > 0) {
             let dateFrame = [];
-            // check if the tripData.events is populated
-            if (tripData.events && Object.keys(tripData.events).length > 0) {
+            // check if the currentTripData.events is populated
+            if (currentTripData.events && Object.keys(currentTripData.events).length > 0) {
                 // the events are populated
                 // get the dates
-                let startDate = new Date(tripData.startDate);
-                let endDate = new Date(tripData.endDate);
+                let startDate = new Date(currentTripData.startDate);
+                let endDate = new Date(currentTripData.endDate);
                 endDate.setDate(endDate.getDate() + 1);
                 let currentDate = startDate;
                 while (currentDate <= endDate) {
@@ -60,23 +60,23 @@ const PlannerPage = (props) => {
                 }
                 setDates(dateFrame);
 
-                // go through the tripData.events object
-                for (const key in tripData.events) {
+                // go through the currentTripData.events object
+                for (const key in currentTripData.events) {
                     // check if the populated arrays, and change the startTime and endTime to Date objects if the startTime or endTime are also strings
-                    if (tripData.events[key].length > 0) {
+                    if (currentTripData.events[key].length > 0) {
                         // loop through the array, and change the startTime and endTime to Date objects
-                        for (let i = 0; i < tripData.events[key].length; i++) {
-                            tripData.events[key][i].startTime = new Date(tripData.events[key][i].startTime);
-                            tripData.events[key][i].endTime = new Date(tripData.events[key][i].endTime);
+                        for (let i = 0; i < currentTripData.events[key].length; i++) {
+                            currentTripData.events[key][i].startTime = new Date(currentTripData.events[key][i].startTime);
+                            currentTripData.events[key][i].endTime = new Date(currentTripData.events[key][i].endTime);
                         }
                     }
                 }
 
-                setEvents(tripData.events);
+                setEvents(currentTripData.events);
                 
                 // set the tripName to the tripData.tripName
-                setTripName(tripData.tripName);
-                axios.post(`/addevents/${tripId}`, tripData
+                setTripName(currentTripData.tripName);
+                axios.post(`/addevents/${tripId}`, currentTripData
                 , {
                     headers: {
                         "Authorization": `Bearer ${sessionStorage.getItem("token")}`
@@ -85,16 +85,16 @@ const PlannerPage = (props) => {
                 .then()
                 .catch()
                 // set the trip name for editing use
-                setTripName(tripData.tripName);
+                setTripName(currentTripData.tripName);
                 setIsReady(true);
             } else {
                 // the events are not populated
                 // populate the events with empty arrays for each date from the start date to the end date, including the start date and end date
                 let timeFrame = [];
                 let blankEvents = {};
-                let startDate = new Date(tripData.startDate);
+                let startDate = new Date(currentTripData.startDate);
                 // add one day to the end date to include the end date
-                let endDate = new Date(tripData.endDate);
+                let endDate = new Date(currentTripData.endDate);
                 endDate.setDate(endDate.getDate() + 1);
                 let currentDate = startDate;
                 while (currentDate <= endDate) {
@@ -107,15 +107,15 @@ const PlannerPage = (props) => {
                 timeFrame.forEach(date => {
                     blankEvents[date] = [];
                 })
-                tripData.events = blankEvents;
-                setEvents(tripData.events);
+                currentTripData.events = blankEvents;
+                setEvents(currentTripData.events);
                 setDates(dateFrame);
                 
                 // set the trip name for editing use
-                setTripName(tripData.tripName);
+                setTripName(currentTripData.tripName);
                 
                 // update the tripData on the backend
-                axios.post(`/addevents/${tripId}`, tripData
+                axios.post(`/addevents/${tripId}`, currentTripData
                 , {
                     headers: {
                         "Authorization": `Bearer ${sessionStorage.getItem("token")}`
@@ -126,7 +126,7 @@ const PlannerPage = (props) => {
                 setIsReady(true);
             }
         }
-    }, [tripId, tripData])
+    }, [tripId, currentTripData])
 
     const convertDay = (day) => {
         // convert the day number to monday, tuesday, etc.
@@ -155,7 +155,6 @@ const PlannerPage = (props) => {
         window.location.href = "/";
     }
 
-
     // create a temporary string to hold the new trip name
     const changeTripName = (e) => {
         // change the trip name in the tripData object
@@ -167,45 +166,48 @@ const PlannerPage = (props) => {
         if (toggleEditName) {
             // check if the trip name is empty
             if (tripName) {
-                // if it is empty, return an error
                 // if it is not empty, update the trip name in the tripData object
-                // set the tripData with the updated trip name
-                tripData.tripName = tripName;
-                props.setTripData(Object.assign(
-                    {},
-                    {
-                        ...props.tripData,
-                        tripName: tripName
-                    }
-                ));
-                // update the trip name on the backend
-                axios.put(`/edittrip/${tripId}`,
-                tripData,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${sessionStorage.getItem("token")}`
-                    }
-                })
-                .then(res => {
-                })
-                .catch(err => {
-                })
+                // set the tripData with the ucurrentTdated trip name
+                setCurrentTripData({
+                    ...currentTripData,
+                    tripName: tripName
+                });
+                console.log(currentTripData);
                 setToggleEditName(false);
             } else {
                 alert("Please enter a trip name");
             }
 
         } else {
+            // if it is empty, return an error
             setToggleEditName(true);
         }
     }
+    useEffect(() => {
+        if (currentTripData){
+            console.log(currentTripData);
+            axios.put(`/edittrip/${tripId}`,
+            currentTripData,
+            {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+                }
+            })
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+    }, [currentTripData])
 
     // add an event to the calendar
     const addEvent = (e) => {
         if (toggleAddEvent) {
             setToggleAddEvent(false);
         } else {
-        setToggleAddEvent(true);
+            setToggleAddEvent(true);
         }
     }
 
@@ -230,12 +232,12 @@ const PlannerPage = (props) => {
 
     return (
         <>
-            {tripData.tripName !== "" && tripData.events ? 
+            {currentTripData ? 
                 <div className="planner-page">
                     <div className="planner-page__calendar">
                         <div className="calendar__header">
                             <div className="calendar__name-wrap">
-                                {!toggleEditName ? <h1 className="calendar__title">{tripData.tripName}</h1>:
+                                {!toggleEditName ? <h1 className="calendar__title">{currentTripData.tripName}</h1>:
                                 <input className="calendar__title" type="text" value={tripName} onChange={changeTripName}/>}
                                 <span onClick={toggleEditTripsName} className="calendar__edit"><img src="https://img.icons8.com/ios/50/000000/edit-file.png" alt="edit trip name button"/></span>
                             </div>
@@ -248,7 +250,7 @@ const PlannerPage = (props) => {
                             { isReady ? 
                                 <div>
                                     <Timetable 
-                                        events = {tripData.events}
+                                        events = {currentTripData.events}
                                     />
                                 </div>
                             : <div>No days to display</div>
@@ -259,8 +261,8 @@ const PlannerPage = (props) => {
                         <AddEventModal 
                         events={events} 
                         dates={dates} 
-                        tripData={tripData} 
-                        setTripData={setTripData} 
+                        currentTripData={currentTripData} 
+                        setCurrentTripData={setCurrentTripData} 
                         setToggleAddEvent={setToggleAddEvent} 
                         isReady={isReady} 
                         setIsReady={setIsReady} 
