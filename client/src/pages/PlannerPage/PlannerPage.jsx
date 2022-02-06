@@ -16,10 +16,7 @@ const PlannerPage = (props) => {
     const [events, setEvents] = useState();
 
     const [toggleAddEvent, setToggleAddEvent] = useState(false);
-    
     const [toggleEditName, setToggleEditName] = useState(false);
-
-    const [tripName, setTripName] = useState("");
 
     // fail safe for when trying to load a schedule with out getting the data first
     const [isReady, setIsReady] = useState(false);
@@ -71,11 +68,8 @@ const PlannerPage = (props) => {
                         }
                     }
                 }
-
                 setEvents(currentTripData.events);
                 
-                // set the tripName to the tripData.tripName
-                setTripName(currentTripData.tripName);
                 axios.post(`/addevents/${tripId}`, currentTripData
                 , {
                     headers: {
@@ -84,8 +78,6 @@ const PlannerPage = (props) => {
                 })
                 .then()
                 .catch()
-                // set the trip name for editing use
-                setTripName(currentTripData.tripName);
                 setIsReady(true);
             } else {
                 // the events are not populated
@@ -111,9 +103,6 @@ const PlannerPage = (props) => {
                 setEvents(currentTripData.events);
                 setDates(dateFrame);
                 
-                // set the trip name for editing use
-                setTripName(currentTripData.tripName);
-                
                 // update the tripData on the backend
                 axios.post(`/addevents/${tripId}`, currentTripData
                 , {
@@ -121,8 +110,8 @@ const PlannerPage = (props) => {
                         "Authorization": `Bearer ${sessionStorage.getItem("token")}`
                     }
                 })
-                .then(res => {
-                })
+                .then()
+                .catch()
                 setIsReady(true);
             }
         }
@@ -158,19 +147,22 @@ const PlannerPage = (props) => {
     // create a temporary string to hold the new trip name
     const changeTripName = (e) => {
         // change the trip name in the tripData object
-        setTripName(e.target.value);
+        setCurrentTripData({
+            ...currentTripData,
+            tripName: e.target.value
+        })
     }
 
     // update the trip name
     const toggleEditTripsName = (e) => {
         if (toggleEditName) {
             // check if the trip name is empty
-            if (tripName) {
+            if (currentTripData.tripName) {
                 // if it is not empty, update the trip name in the tripData object
                 // set the tripData with the ucurrentTdated trip name
                 setCurrentTripData({
                     ...currentTripData,
-                    tripName: tripName
+                    tripName: currentTripData.tripName
                 });
                 console.log(currentTripData);
                 setToggleEditName(false);
@@ -238,7 +230,7 @@ const PlannerPage = (props) => {
                         <div className="calendar__header">
                             <div className="calendar__name-wrap">
                                 {!toggleEditName ? <h1 className="calendar__title">{currentTripData.tripName}</h1>:
-                                <input className="calendar__title" type="text" value={tripName} onChange={changeTripName}/>}
+                                <input className="calendar__title" type="text" value={currentTripData.tripName} onChange={changeTripName}/>}
                                 <span onClick={toggleEditTripsName} className="calendar__edit"><img src="https://img.icons8.com/ios/50/000000/edit-file.png" alt="edit trip name button"/></span>
                             </div>
                             <div className="calendar__add-delete-wrap">

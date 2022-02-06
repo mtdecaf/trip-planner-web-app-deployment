@@ -35,7 +35,6 @@ const Dashboard = (props) => {
         zoom: 10
       });
 
-
     // get the map token from the backend
     useEffect(() => {
         axios.get("/mapToken")
