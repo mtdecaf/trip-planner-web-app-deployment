@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "../../middleware/axiosConfig";
 import "./LogIn.scss";
+import { login } from "../../store/features/auth";
 
 const LogIn = () => {
     // states for the form for logging in
@@ -32,17 +33,19 @@ const LogIn = () => {
             setErrorMessage("Please enter a password");
         }
         // make a post the login info to the server, if successful, set isLoggedIn to true
-        axios.post("/login", { email, password })
-        .then(res => {
-            setIsLoggedIn(true);
-            // store the token in session storage if successful
-            sessionStorage.setItem("token", res.data.token);
-            window.location.href = "/";
-        })
-        // if not successful, alert the user
-        .catch(err => {
-            setErrorMessage("Email or password is incorrect");
-        });
+        // axios.post("/login", { email, password })
+        // .then(res => {
+        //     setIsLoggedIn(true);
+        //     // store the token in session storage if successful
+        //     sessionStorage.setItem("token", res.data.token);
+        //     window.location.href = "/";
+        // })
+        // // if not successful, alert the user
+        // .catch(err => {
+        //     setErrorMessage("Email or password is incorrect");
+        // });
+        // call login action
+        login(email, password);
     };
 
     return (
