@@ -7,8 +7,8 @@ const AUTH_ERROR = 'AUTH_ERROR';
 // authentication and authorization action creators
 export const login = (email, password) => async dispatch => {
     try {
-        // authendicate user, get the token
         const res = await axios.post('/login', { email, password });
+        // authendicate user, get the token
         dispatch({
             type: AUTH_LOGIN,
             payload: res.data
@@ -20,6 +20,10 @@ export const login = (email, password) => async dispatch => {
         });
     }
 };
+
+export const setAuthToken = token => {
+    sessionStorage.setItem('token', token);
+}
 
 // authentication and authorization reducer
 const initialState = {

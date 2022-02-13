@@ -3,10 +3,13 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "../../middleware/axiosConfig";
 import { connect } from "react-redux";
 import "./LogIn.scss";
+
+import store from '../../state/store';
 import { login } from "../../state/features/auth";
 
 const LogIn = () => {
     // states for the form for logging in
+
     const [user, setUser] = useState({
         email: "",
         password: ""
@@ -39,14 +42,17 @@ const LogIn = () => {
         //     setIsLoggedIn(true);
         //     // store the token in session storage if successful
         //     sessionStorage.setItem("token", res.data.token);
-        //     window.location.href = "/";
+        //     // window.location.href = "/";
         // })
         // // if not successful, alert the user
         // .catch(err => {
         //     setErrorMessage("Email or password is incorrect");
         // });
+        console.log(email, password);
         // call login action
-        login(email, password);
+        store.dispatch(
+            login(email, password)
+        );
     };
 
     return (
@@ -66,6 +72,13 @@ const LogIn = () => {
             </div>
         </div>
     );
+};
+
+// connect the redux store to the component
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    };
 };
 
 export default LogIn;

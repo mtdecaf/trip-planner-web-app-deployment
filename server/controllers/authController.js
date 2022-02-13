@@ -50,6 +50,7 @@ exports.logInController = (req, res) => {
               message: "login successful",
               token: token,
             });
+            console.log(token);
           } else {
             res.status(403).send({ token: null, message: "login incorrect" });
           }
