@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "../../middleware/axiosConfig";
 import { connect } from "react-redux";
@@ -9,12 +9,11 @@ import { login } from "../../state/features/auth";
 
 const LogIn = () => {
     // states for the form for logging in
-
     const [user, setUser] = useState({
         email: "",
         password: ""
     });
-    const [isloggedIn, setIsLoggedIn] = useState(false);
+    const isAuthenticated = store.getState().auth.isAuthenticated;
     const [errorMessage, setErrorMessage] = useState("")
 
     const handleChange = e => {
@@ -36,24 +35,17 @@ const LogIn = () => {
         if (!password){
             setErrorMessage("Please enter a password");
         }
-        // make a post the login info to the server, if successful, set isLoggedIn to true
-        // axios.post("/login", { email, password })
-        // .then(res => {
-        //     setIsLoggedIn(true);
-        //     // store the token in session storage if successful
-        //     sessionStorage.setItem("token", res.data.token);
-        //     // window.location.href = "/";
-        // })
-        // // if not successful, alert the user
-        // .catch(err => {
-        //     setErrorMessage("Email or password is incorrect");
-        // });
-        console.log(email, password);
-        // call login action
         store.dispatch(
             login(email, password)
         );
     };
+
+    useEffect(() => {
+        // if the token is in session storage, redirect to the home page
+        if (sessionStorage.getItem("token")) {
+            window.location.href = "/";
+        }
+    }, [store.getState().auth.isAuthenticated]);
 
     return (
         <div className="log-in">
@@ -66,7 +58,7 @@ const LogIn = () => {
                     <input className="log-in__form-input" type="password" name="password" onChange={handleChange} value={user.password} />
                     {errorMessage && <p className="log-in__error">{errorMessage}</p>}
                     {/* if the user is logged in, redirect to the home page */}
-                    {isloggedIn ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />}
+                    {isAuthenticated ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />}
                     <Link to="/" className="log-in__form-button">Cancel</Link>
                 </form>
             </div>
@@ -77,8 +69,10 @@ const LogIn = () => {
 // connect the redux store to the component
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        isAuthenticated: state.auth.isAuthenticated,
+        email: state.auth.email,
+        authToken: state.auth.authToken
     };
 };
 
-export default LogIn;
+export default connect(mapStateToProps, {login})(LogIn);
