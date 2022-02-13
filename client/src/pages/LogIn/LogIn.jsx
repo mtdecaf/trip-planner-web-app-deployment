@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "../../middleware/axiosConfig";
+import { connect } from "react-redux";
 import "./LogIn.scss";
-import { login } from "../../store/features/auth";
+import { login } from "../../state/features/auth";
 
 const LogIn = () => {
     // states for the form for logging in

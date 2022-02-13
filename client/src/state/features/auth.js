@@ -24,6 +24,7 @@ export const login = (email, password) => async dispatch => {
 // authentication and authorization reducer
 const initialState = {
     isAuthenticated: false,
+    email: '',
     error: null
 };
 export default (state = initialState, action) => {
