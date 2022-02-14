@@ -197,7 +197,7 @@ const PlannerPage = (props) => {
             .then()
             .catch()
         }
-    }, [currentTripData])
+    }, [currentTripData, tripId])
 
     // add an event to the calendar
     const addEvent = (e) => {
