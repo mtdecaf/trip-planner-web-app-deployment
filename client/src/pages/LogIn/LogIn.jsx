@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
-import axios from "../../middleware/axiosConfig";
 import { connect } from "react-redux";
 import "./LogIn.scss";
 
@@ -45,7 +44,7 @@ const LogIn = () => {
         if (sessionStorage.getItem("token")) {
             window.location.href = "/";
         }
-    }, [store.getState().auth.isAuthenticated]);
+    }, [isAuthenticated]);
 
     return (
         <div className="log-in">
