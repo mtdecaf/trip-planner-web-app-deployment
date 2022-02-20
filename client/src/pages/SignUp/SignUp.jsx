@@ -28,7 +28,6 @@ const UserAuth = () => {
         const passwordConfirmation = form.elements.passwordConfirmation.value;
 
         const {username, email, password} = user;
-        console.log(username, email, password, passwordConfirmation, user);
         // username, email, password validation
         if (!username){
             setErrorMessage ("Username is required");

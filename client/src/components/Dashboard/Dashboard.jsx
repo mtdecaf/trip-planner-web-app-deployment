@@ -9,10 +9,17 @@ import axios from "../../middleware/axiosConfig";
 import AddTripModal from "../AddTripModal/AddTripModal";
 import TripCard from "../TripCard/TripCard";
 
+// import user's tripdata from the store
+import { useSelector } from "react-redux";
+import store from "../../state/store";
+import { retrieveTrip } from "../../state/features/trip";
+
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
+
 const Dashboard = (props) => {
+
     const [mapApiToken, setMapApiToken] = useState();
     // states that handle components displayed in mobile view
     const [dashboardDisplay, setDashboardDisplay] = useState(true);
@@ -22,6 +29,9 @@ const Dashboard = (props) => {
     const [sideBarDisplayMobile, setSideBarDisplayMobile] = useState(true);
 
     const [addTripDisplay, setAddTripDisplay] = useState(props.addTripDisplay);
+
+    // trip data
+    const tripData = useSelector(state => state.trip.trip);
 
     // state that handle the map viewport
     const [viewport, setViewport] = useState({
@@ -34,13 +44,22 @@ const Dashboard = (props) => {
         zoom: 10
       });
 
-    // get the map token from the backend
+    // get the map token from the backend and get trip data from state
     useEffect(() => {
+        const token = sessionStorage.getItem("token");
+        const authHeader = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
         axios.get("/mapToken")
         .then(res => {
             setMapApiToken(res.data);
         })
         .catch();
+
+        // get the trip data
+        store.dispatch(retrieveTrip(authHeader));
     }, []);
 
     const toggleDisplay = () => {
@@ -77,7 +96,7 @@ const Dashboard = (props) => {
                 <span onClick={toggleAddTrip} className="side-bar__add-new"><img src="https://img.icons8.com/ios-glyphs/30/000000/plus-2-math.png" alt="add a trip button"/></span>
                 {/* trip cards; map it out using the data */}
                 <div className="trip-card">
-                    {props.tripData ? props.tripData.map((trip, index) =>
+                    {tripData ? tripData.map((trip, index) =>
                         <TripCard 
                         key={index} 
                         tripData={trip}
