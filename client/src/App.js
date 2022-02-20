@@ -13,7 +13,6 @@ import { authendicate } from "./state/features/auth";
 import { useSelector } from "react-redux";
 
 function App() {
-    const state = useSelector(state => state);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const username = useSelector(state => state.auth.username);
 

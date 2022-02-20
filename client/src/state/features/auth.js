@@ -1,4 +1,5 @@
 import axios from "../../middleware/axiosConfig";
+
 // authentication and authorization action types
 const AUTH_LOGIN = 'AUTH_LOGIN';
 const AUTH_LOGOUT = 'AUTH_LOGOUT';

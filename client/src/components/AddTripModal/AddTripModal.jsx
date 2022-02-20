@@ -6,7 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import './AddTripModal.scss';
 
+// import state
+import { useSelector } from "react-redux";
+
 const AddTripModal = (props) => {
+    const email = useSelector(state => state.auth.email);
     const [date, setDate] = useState(null);
 
     const [startLocation, setStartLocation] = useState('');
@@ -44,7 +48,7 @@ const AddTripModal = (props) => {
         let days = Math.ceil(diff / (1000 * 3600 * 24));
         if(days <= 7) {
         // post the information to the backend
-        axios.post('/addtrip', {date, startLocation, endLocation, tripName: tripName.value, email: props.email, tripId})
+        axios.post('/addtrip', {date, startLocation, endLocation, tripName: tripName.value, email, tripId})
         .then(res => {
             // post date, start location, end location, trip name to the backend
             props.toggleAddTrip();
