@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+
 import "./LogIn.scss";
 
 import store from '../../state/store';
@@ -38,13 +39,6 @@ const LogIn = () => {
             login(email, password)
         );
     };
-
-    useEffect(() => {
-        // if the token is in session storage, redirect to the home page
-        if (sessionStorage.getItem("token")) {
-            window.location.href = "/";
-        }
-    }, [isAuthenticated]);
 
     return (
         <div className="log-in">

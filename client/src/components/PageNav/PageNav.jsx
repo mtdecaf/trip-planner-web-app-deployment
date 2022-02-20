@@ -2,12 +2,15 @@ import logo from "../../assets/icons/logo.png"
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import "./PageNav.scss";
 
+import store from "../../state/store";
+
 const PageNav = (props) => {
     const { pathname } = useLocation();
-    // log out function
+    // handle log out
     const logOut = () => {
         sessionStorage.removeItem("token");
         window.location.href = "/";
@@ -30,7 +33,7 @@ const PageNav = (props) => {
     }, [pathname]);
     // if the user is not logged in, show the sign up & login button
     // if the user is logged in, show the logout button and user name
-    if (!props.isLoggedIn) {
+    if (!props.isAuthenticated) {
         return (
             <div className="page-nav">
                 <div className="page-nav__logo-wrap">
