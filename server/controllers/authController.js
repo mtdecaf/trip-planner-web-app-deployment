@@ -45,7 +45,7 @@ exports.logInController = (req, res) => {
               { username: user.username, email: user.email },
               process.env.SECRET_KEY,
               // expires in 1 minute
-              { expiresIn: "1s" }
+              { expiresIn: "10hr" }
             );
             res.status(200).send({
               message: "login successful",

@@ -49,8 +49,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage 
                     isAuthenticated={isAuthenticated}
-                    tripData={tripData} 
-                    setTripData={setTripData} 
                     addTripDisplay={addTripDisplay} />} 
                 />
                 <Route path="/planner/:tripId" element={ <PlannerPage 

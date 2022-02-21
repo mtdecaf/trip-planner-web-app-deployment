@@ -8,6 +8,8 @@ import './AddTripModal.scss';
 
 // import state
 import { useSelector } from "react-redux";
+import { addTrip } from "../../state/features/trip";
+import store from "../../state/store";
 
 const AddTripModal = (props) => {
     const email = useSelector(state => state.auth.email);
@@ -46,17 +48,20 @@ const AddTripModal = (props) => {
         let endDate = new Date(date[1]);
         let diff = Math.abs(startDate.getTime() - endDate.getTime());
         let days = Math.ceil(diff / (1000 * 3600 * 24));
+        let tripData = {
+            date,
+            startLocation,
+            endLocation,
+            tripName: tripName.value,
+            email,
+            tripId
+        }
+
         if(days <= 7) {
-        // post the information to the backend
-        axios.post('/addtrip', {date, startLocation, endLocation, tripName: tripName.value, email, tripId})
-        .then(res => {
-            // post date, start location, end location, trip name to the backend
-            props.toggleAddTrip();
-            props.setTripData(props.tripData);
-            window.location.href = `/planner/${tripId}`;
-        })
-        .catch(err => {
-        })} else {
+            // post the information to the backend
+            store.dispatch(addTrip(tripData));
+
+        } else {
             alert("Please select a trip duration of less than 7 days.")
         }
     }

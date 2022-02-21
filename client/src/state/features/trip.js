@@ -20,6 +20,19 @@ export const retrieveTrip = (authHeader) => async dispatch => {
     }
 }
 
+export const addTrip = (tripData) => async dispatch => {
+    try {
+        const res = await axios.post("/addtrip", tripData);
+        dispatch({
+            type: TRIP_ADD,
+            payload: res.data
+        });
+        window.location.href = `/planner/${tripData.tripId}`;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const initialState = {
     trip: [],
     error: null
