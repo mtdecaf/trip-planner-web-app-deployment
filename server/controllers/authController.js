@@ -44,7 +44,8 @@ exports.logInController = (req, res) => {
             const token = jwt.sign(
               { username: user.username, email: user.email },
               process.env.SECRET_KEY,
-              { expiresIn: "10h" }
+              // expires in 1 minute
+              { expiresIn: "1s" }
             );
             res.status(200).send({
               message: "login successful",

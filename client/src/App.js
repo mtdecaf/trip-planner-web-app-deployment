@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 function App() {
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const username = useSelector(state => state.auth.username);
-
+    const authError = useSelector(state => state.auth.error);
     // trip info state
     const [tripData, setTripData] = useState();
 
@@ -30,10 +30,18 @@ function App() {
                 Authorization: `Bearer ${token}`
             }
         };
+
         if (token) {
+            // dispatch authendicate action and then check if the user is authenticated
             store.dispatch(authendicate(authHeader));
         }
+
     }, [token]);
+    useEffect(() => {
+        if (authError === 403) {
+            sessionStorage.removeItem("token");
+        }
+    }, [authError]);
 
     return (
         <div className="App">

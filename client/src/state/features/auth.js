@@ -93,7 +93,7 @@ export default (state = initialState, action) => {
                 isAuthenticated: false,
                 authToken: '',
                 email: '',
-                error: action.payload.error
+                error: 403
             };
         default:
             return state;
