@@ -11,7 +11,6 @@ const logInRoute = require('./server/routes/LogInRoute');
 
 const addTripRoute = require('./server/routes/AddTripRoute');
 const getUserTripsRoute = require('./server/routes/GetUserTripsRoute');
-const getCurrentTripRoute = require('./server/routes/GetCurrentTripRoute');
 const editTripRoute = require('./server/routes/EditTripRoute');
 const deleteTripRoute = require('./server/routes/DeleteTripRoute');
 
@@ -41,7 +40,6 @@ app.use('/login', logInRoute);
 // trips routes
 app.use('/addtrip', addTripRoute);
 app.use('/gettrip', getUserTripsRoute);
-app.use('/getcurrenttrip', getCurrentTripRoute);
 app.use('/edittrip', editTripRoute);
 app.use('/deletetrip', deleteTripRoute);
 

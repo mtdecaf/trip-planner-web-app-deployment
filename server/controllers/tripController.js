@@ -50,19 +50,6 @@ exports.getUserTripsController = (req, res) => {
     });
 }
 
-exports.getCurrentTripController = (req, res) => {
-    // get tripId from the request params
-    const tripId = req.params.tripId;
-    // find the trip with the tripId
-    Trip.findOne({ tripId }, (err, trip) => {
-        if (err) {
-            res.status(400).send(err);
-        } else {
-            res.status(200).send(trip);
-        }
-    });
-}
-
 exports.editTripController = (req, res) => {
     // find the trip with the tripId
     const tripId = req.params.tripId;

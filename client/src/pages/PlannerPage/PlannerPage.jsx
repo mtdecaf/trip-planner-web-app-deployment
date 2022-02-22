@@ -6,8 +6,11 @@ import axios from "../../middleware/axiosConfig";
 
 import AddEventModal from "../../components/AddEventModal/AddEventModal";
 
+// import state
+import { useSelector } from "react-redux";
+
 const PlannerPage = (props) => {
-    const { tripId } = useParams()
+    const { tripId } = useParams();
     
     const [ dates, setDates ] = useState([]);
 
@@ -19,20 +22,16 @@ const PlannerPage = (props) => {
     // fail safe for when trying to load a schedule with out getting the data first
     const [isReady, setIsReady] = useState(false);
 
+    const tripData = useSelector(state => state.trip.trip);
+
     // on load, get the trip data
     useEffect(() => {
-        const token = sessionStorage.getItem("token");
-        axios.get(`/getcurrenttrip/${tripId}`,
-        {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-        .then(res => {
-            setCurrentTripData(res.data);
-        })
-        .catch()
-    }, [tripId])
+        // find the trip data with the trip id
+        if (tripData.length > 0) {
+            const trip = tripData.find(trip => trip.tripId === tripId)
+            setCurrentTripData(trip);
+        }
+    }, [tripData])
 
     // only do this when currentTripData is fetched from the server
     useEffect(() => {

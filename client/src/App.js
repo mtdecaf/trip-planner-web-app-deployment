@@ -10,14 +10,13 @@ import LogIn from './pages/LogIn/LogIn';
 
 import store from './state/store';
 import { authendicate } from "./state/features/auth";
+import { retrieveTrip } from './state/features/trip';
 import { useSelector } from "react-redux";
 
 function App() {
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const username = useSelector(state => state.auth.username);
     const authError = useSelector(state => state.auth.error);
-    // trip info state
-    const [tripData, setTripData] = useState();
 
     // add trip display state
     const [addTripDisplay] = useState(false);
@@ -35,8 +34,9 @@ function App() {
             // dispatch authendicate action and then check if the user is authenticated
             store.dispatch(authendicate(authHeader));
         }
-
+        store.dispatch(retrieveTrip(authHeader));
     }, [token]);
+    
     useEffect(() => {
         if (authError === 403) {
             sessionStorage.removeItem("token");
@@ -52,9 +52,7 @@ function App() {
                     addTripDisplay={addTripDisplay} />} 
                 />
                 <Route path="/planner/:tripId" element={ <PlannerPage 
-                    isAuthenticated={isAuthenticated} 
-                    tripData={tripData} 
-                    setTripData={setTripData} />} 
+                    isAuthenticated={isAuthenticated} />} 
                 />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />

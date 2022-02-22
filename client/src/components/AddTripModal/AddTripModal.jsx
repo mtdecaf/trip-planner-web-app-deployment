@@ -18,8 +18,6 @@ const AddTripModal = (props) => {
     const [startLocation, setStartLocation] = useState('');
     const [endLocation, setEndLocation] = useState('');
 
-    // const [buttonDisabled, setButtonDisabled] = useState(true);
-
     // variables
     const button = document.getElementById("submit-button");
     let tripName = document.getElementById("add-trip__trip-name");

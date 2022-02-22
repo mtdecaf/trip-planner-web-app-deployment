@@ -11,8 +11,6 @@ import TripCard from "../TripCard/TripCard";
 
 // import user's tripdata from the store
 import { useSelector } from "react-redux";
-import store from "../../state/store";
-import { retrieveTrip } from "../../state/features/trip";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -57,9 +55,6 @@ const Dashboard = (props) => {
             setMapApiToken(res.data);
         })
         .catch();
-
-        // get the trip data
-        store.dispatch(retrieveTrip(authHeader));
     }, []);
 
     const toggleDisplay = () => {
