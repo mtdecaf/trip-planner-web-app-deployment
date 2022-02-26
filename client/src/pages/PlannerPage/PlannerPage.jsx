@@ -8,6 +8,8 @@ import AddEventModal from "../../components/AddEventModal/AddEventModal";
 
 // import state
 import { useSelector } from "react-redux";
+import store from "../../state/store";
+import { removeTrip } from "../../state/features/trip";
 
 const PlannerPage = (props) => {
     const { tripId } = useParams();
@@ -31,7 +33,7 @@ const PlannerPage = (props) => {
             const trip = tripData.find(trip => trip.tripId === tripId)
             setCurrentTripData(trip);
         }
-    }, [tripData])
+    }, [tripData, tripId]);
 
     // only do this when currentTripData is fetched from the server
     useEffect(() => {
@@ -161,18 +163,18 @@ const PlannerPage = (props) => {
                     ...currentTripData,
                     tripName: currentTripData.tripName
                 });
-                props.setTripData(
-                    // find the trip in the tripData array according to the tripId
-                    props.tripData.map(trip => {
-                        if (trip.tripId === tripId) {
-                            return {
-                                ...trip,
-                                tripName: currentTripData.tripName
-                            }
-                        }
-                        return trip;
-                    })
-                )
+                // props.setTripData(
+                //     // find the trip in the tripData array according to the tripId
+                //     props.tripData.map(trip => {
+                //         if (trip.tripId === tripId) {
+                //             return {
+                //                 ...trip,
+                //                 tripName: currentTripData.tripName
+                //             }
+                //         }
+                //         return trip;
+                //     })
+                // )
                 setToggleEditName(false);
             } else {
                 alert("Please enter a trip name");
@@ -210,19 +212,11 @@ const PlannerPage = (props) => {
     const deleteTrip = (e) => {
         // ask the user if they are sure they want to delete the trip
         if (window.confirm("Are you sure you want to delete this trip?")) {
-            // delete the trip from the backend
-            axios.delete(`/deletetrip/${tripId}`,
-            {
+            store.dispatch(removeTrip(tripId,{
                 headers: {
                     "Authorization": `Bearer ${sessionStorage.getItem("token")}`
                 }
-            })
-            .then(res => {
-                // redirect to the home page
-                window.location.href = "/";
-            })
-            .catch(err => {
-            })
+            }));
         }
     }
 

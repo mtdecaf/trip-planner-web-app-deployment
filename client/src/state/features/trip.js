@@ -40,6 +40,7 @@ export const removeTrip = (tripId, authHeader) => async dispatch => {
             type: TRIP_REMOVE,
             payload: res.data
         });
+        window.location.href = "/";
     } catch (error) {
         console.log(error);
     }
@@ -66,7 +67,7 @@ const tripReducer = (state = initialState, action) => {
         case TRIP_REMOVE:
             return {
                 ...state,
-                trip: state.trip.filter(trip => trip.tripId !== action.payload)
+                trip: state.trip.filter(trip => trip.tripId !== action.payload.tripId)
             };
         case TRIP_UPDATE:
             return {
