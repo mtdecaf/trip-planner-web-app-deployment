@@ -33,13 +33,25 @@ export const addTrip = (tripData) => async dispatch => {
     }
 }
 
+export const removeTrip = (tripId, authHeader) => async dispatch => {
+    try {
+        const res = await axios.delete(`/deletetrip/${tripId}`, authHeader);
+        dispatch({
+            type: TRIP_REMOVE,
+            payload: res.data
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const initialState = {
     trip: [],
     error: null
 };
 
 // trip data reducer
-export default (state = initialState, action) => {
+const tripReducer = (state = initialState, action) => {
     switch (action.type) {
         case TRIP_RETRIEVE:
             return {
@@ -65,3 +77,5 @@ export default (state = initialState, action) => {
             return state;
     }
 }
+
+export default tripReducer;

@@ -44,12 +44,6 @@ const Dashboard = (props) => {
 
     // get the map token from the backend and get trip data from state
     useEffect(() => {
-        const token = sessionStorage.getItem("token");
-        const authHeader = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
         axios.get("/mapToken")
         .then(res => {
             setMapApiToken(res.data);

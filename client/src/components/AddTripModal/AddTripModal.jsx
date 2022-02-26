@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import axios from "../../middleware/axiosConfig";
 import { v4 as uuidv4 } from 'uuid';
 
 import './AddTripModal.scss';
