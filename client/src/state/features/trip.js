@@ -46,6 +46,18 @@ export const removeTrip = (tripId, authHeader) => async dispatch => {
     }
 }
 
+export const updateTrip = (tripId, currentTripData, authHeader) => async dispatch => {
+    try {
+        const res = await axios.put(`/edittrip/${tripId}`, currentTripData, authHeader);
+        dispatch({
+            type: TRIP_UPDATE,
+            payload: res.data
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const initialState = {
     trip: [],
     error: null

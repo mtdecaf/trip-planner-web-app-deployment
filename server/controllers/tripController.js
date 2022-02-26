@@ -54,6 +54,7 @@ exports.editTripController = (req, res) => {
     // find the trip with the tripId
     const tripId = req.params.tripId;
     const tripData = req.body;
+    console.log(tripData);
     Trip.findOne({ tripId }, (err, trip) => {
         // update the trip with the new data
         if (err) {

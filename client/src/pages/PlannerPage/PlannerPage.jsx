@@ -9,7 +9,7 @@ import AddEventModal from "../../components/AddEventModal/AddEventModal";
 // import state
 import { useSelector } from "react-redux";
 import store from "../../state/store";
-import { removeTrip } from "../../state/features/trip";
+import { updateTrip, removeTrip } from "../../state/features/trip";
 
 const PlannerPage = (props) => {
     const { tripId } = useParams();
@@ -163,18 +163,7 @@ const PlannerPage = (props) => {
                     ...currentTripData,
                     tripName: currentTripData.tripName
                 });
-                // props.setTripData(
-                //     // find the trip in the tripData array according to the tripId
-                //     props.tripData.map(trip => {
-                //         if (trip.tripId === tripId) {
-                //             return {
-                //                 ...trip,
-                //                 tripName: currentTripData.tripName
-                //             }
-                //         }
-                //         return trip;
-                //     })
-                // )
+                updateTripData();
                 setToggleEditName(false);
             } else {
                 alert("Please enter a trip name");
@@ -185,20 +174,14 @@ const PlannerPage = (props) => {
             setToggleEditName(true);
         }
     }
-    // update the currentTripData object
-    useEffect(() => {
-        if (currentTripData){
-            axios.put(`/edittrip/${tripId}`,
-            currentTripData,
-            {
-                headers: {
-                    "Authorization": `Bearer ${sessionStorage.getItem("token")}`
-                }
-            })
-            .then()
-            .catch()
-        }
-    }, [currentTripData, tripId])
+
+    const updateTripData = () => {
+        store.dispatch(updateTrip(tripId, currentTripData, {
+            headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }));
+    }
 
     // add an event to the calendar
     const addEvent = (e) => {
