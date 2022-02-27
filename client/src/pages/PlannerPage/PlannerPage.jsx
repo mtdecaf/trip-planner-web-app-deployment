@@ -76,67 +76,9 @@ const PlannerPage = (props) => {
                 .then()
                 .catch()
                 setIsReady(true);
-            } else {
-                // the events are not populated
-                // populate the events with empty arrays for each date from the start date to the end date, including the start date and end date
-                let timeFrame = [];
-                let blankEvents = {};
-                let startDate = new Date(currentTripData.startDate);
-                // add one day to the end date to include the end date
-                let endDate = new Date(currentTripData.endDate);
-                endDate.setDate(endDate.getDate() + 1);
-                let currentDate = startDate;
-                while (currentDate <= endDate) {
-                    let date = new Date(currentDate);
-                    dateFrame.push(date);
-                    timeFrame.push(convertDay(date.getDay()));
-                    currentDate.setDate(currentDate.getDate() + 1);
-                }
-                // cast the timeFrame to an object of empty arrays
-                timeFrame.forEach(date => {
-                    blankEvents[date] = [];
-                })
-                setCurrentTripData(
-                    {...currentTripData,
-                    events: blankEvents}
-                );
-                setDates(dateFrame);
-                
-                // update the tripData on the backend
-                axios.post(`/addevents/${tripId}`, currentTripData
-                , {
-                    headers: {
-                        "Authorization": `Bearer ${sessionStorage.getItem("token")}`
-                    }
-                })
-                .then()
-                .catch()
-                setIsReady(true);
             }
         }
-    }, [tripId, currentTripData])
-
-    const convertDay = (day) => {
-        // convert the day number to monday, tuesday, etc.
-        switch (day) {
-            case 0:
-                return "Sunday";
-            case 1:
-                return "Monday";
-            case 2:
-                return "Tuesday";
-            case 3:
-                return "Wednesday";
-            case 4:
-                return "Thursday";
-            case 5:
-                return "Friday";
-            case 6:
-                return "Saturday";
-            default:
-                return "";
-        }
-    }
+    }, [tripId, currentTripData]);
 
     // redirect to home page
     const redirectAddTrip = () => {
