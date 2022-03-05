@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { useParams } from "react-router-dom";
 import "./AddEventModal.scss";
+import { useSelector } from "react-redux";
 
 const AddEventModal = (props) => {
+    const { tripId } = useParams();
     const [errorMessage, setErrorMessage] = useState("")
+    const currentTripData = useSelector(state => state.trip.trip).find(trip => trip.tripId === tripId);
+    console.log(currentTripData);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // get all the information from the form and validate it

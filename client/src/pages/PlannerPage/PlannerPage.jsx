@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import store from "../../state/store";
 import { updateTrip, removeTrip } from "../../state/features/trip";
 
-const PlannerPage = (props) => {
+const PlannerPage = () => {
     const { tripId } = useParams();
     
     const [ dates, setDates ] = useState([]);
@@ -24,21 +24,19 @@ const PlannerPage = (props) => {
     // fail safe for when trying to load a schedule with out getting the data first
     const [isReady, setIsReady] = useState(false);
 
-    const tripData = useSelector(state => state.trip.trip);
+    // const tripData = useSelector(state => state.trip.trip);
 
+    const getTripData = useSelector(state => state.trip.trip).find(trip => trip.tripId === tripId);
     // on load, get the trip data
     useEffect(() => {
-        // find the trip data with the trip id
-        if (tripData.length > 0) {
-            const trip = tripData.find(trip => trip.tripId === tripId)
-            setCurrentTripData(trip);
-        }
-    }, [tripData, tripId]);
+        setCurrentTripData(getTripData);
+    }, [getTripData]);
 
     // only do this when currentTripData is fetched from the server
     useEffect(() => {
-        // check if the currentTripData is populated
-        if (currentTripData && Object.keys(currentTripData).length > 0) {
+        console.log("currentTripData updated");
+        // check if the currentTripData exists
+        if (currentTripData) {
             let dateFrame = [];
             // check if the currentTripData.events is populated
             if (currentTripData.events && Object.keys(currentTripData.events).length > 0) {
@@ -53,7 +51,9 @@ const PlannerPage = (props) => {
                     dateFrame.push(date);
                     currentDate.setDate(currentDate.getDate() + 1);
                 }
+                console.log(dateFrame);
                 setDates(dateFrame);
+                console.log(currentTripData.events);
 
                 // go through the currentTripData.events object
                 for (const key in currentTripData.events) {
@@ -78,7 +78,7 @@ const PlannerPage = (props) => {
                 setIsReady(true);
             }
         }
-    }, [tripId, currentTripData]);
+    }, [currentTripData]);
 
     // redirect to home page
     const redirectAddTrip = () => {
