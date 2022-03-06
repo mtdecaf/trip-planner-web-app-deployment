@@ -47,7 +47,6 @@ const PlannerPage = () => {
                 currentDate.setDate(currentDate.getDate() + 1);
             }
             setDates(dateFrame);
-
             // go through the currentTripData.events object
             for (const key in currentTripData.events) {
                 // check if the populated arrays, and change the startTime and endTime to Date objects if the startTime or endTime are also strings
@@ -60,7 +59,7 @@ const PlannerPage = () => {
                 }
             }
             
-            axios.post(`/addevents/${tripId}`, currentTripData
+            axios.post(`/addevents/${tripId}`, currentTripData.events
             , {
                 headers: {
                     "Authorization": `Bearer ${sessionStorage.getItem("token")}`
@@ -109,7 +108,7 @@ const PlannerPage = () => {
     }
 
     // add an event to the calendar
-    const addEvent = (e) => {
+    const addEvent = () => {
         if (toggleAddEvent) {
             setToggleAddEvent(false);
         } else {
@@ -117,7 +116,7 @@ const PlannerPage = () => {
         }
     }
 
-    const deleteTrip = (e) => {
+    const deleteTrip = () => {
         // ask the user if they are sure they want to delete the trip
         if (window.confirm("Are you sure you want to delete this trip?")) {
             store.dispatch(removeTrip(tripId,{

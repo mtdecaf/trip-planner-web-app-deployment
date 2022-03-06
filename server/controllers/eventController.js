@@ -1,7 +1,8 @@
 const Trip = require('../models/tripModel.js');
 
 exports.addEventsController = (req, res) => {
-    const events = req.body.events;
+    const events = req.body;
+    console.log(events);
     // convert the start and end time to Date objects in the events object
     // get the tripId from the request params
     const tripId = req.params.tripId;
