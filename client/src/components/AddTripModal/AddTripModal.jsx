@@ -51,10 +51,8 @@ const AddTripModal = (props) => {
         for (let i = 0; i <= days; i++) {
             let date = new Date(startDate.getTime() + (86400000 * i));
             date = convertDay(date.getDay());
-            console.log(date);
             events[date] = [];
         }
-        console.log(events);
 
         let tripData = {
             date,
@@ -65,7 +63,6 @@ const AddTripModal = (props) => {
             tripId,
             events
         }
-        console.log(tripData);
 
         if(days <= 7) {
             // post the information to the backend

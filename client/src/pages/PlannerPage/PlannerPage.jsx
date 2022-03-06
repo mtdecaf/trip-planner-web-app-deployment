@@ -34,56 +34,43 @@ const PlannerPage = () => {
 
     // only do this when currentTripData is fetched from the server
     useEffect(() => {
-        console.log("currentTripData updated");
         // check if the currentTripData exists
         if (currentTripData) {
             let dateFrame = [];
-            // check if the currentTripData.events is populated
-            if (currentTripData.events && Object.keys(currentTripData.events).length > 0) {
-                // the events are populated
-                // get the dates
-                let startDate = new Date(currentTripData.startDate);
-                let endDate = new Date(currentTripData.endDate);
-                endDate.setDate(endDate.getDate() + 1);
-                let currentDate = startDate;
-                while (currentDate <= endDate) {
-                    let date = new Date(currentDate);
-                    dateFrame.push(date);
-                    currentDate.setDate(currentDate.getDate() + 1);
-                }
-                console.log(dateFrame);
-                setDates(dateFrame);
-                console.log(currentTripData.events);
-
-                // go through the currentTripData.events object
-                for (const key in currentTripData.events) {
-                    // check if the populated arrays, and change the startTime and endTime to Date objects if the startTime or endTime are also strings
-                    if (currentTripData.events[key].length > 0) {
-                        // loop through the array, and change the startTime and endTime to Date objects
-                        for (let i = 0; i < currentTripData.events[key].length; i++) {
-                            currentTripData.events[key][i].startTime = new Date(currentTripData.events[key][i].startTime);
-                            currentTripData.events[key][i].endTime = new Date(currentTripData.events[key][i].endTime);
-                        }
-                    }
-                }
-                
-                axios.post(`/addevents/${tripId}`, currentTripData
-                , {
-                    headers: {
-                        "Authorization": `Bearer ${sessionStorage.getItem("token")}`
-                    }
-                })
-                .then()
-                .catch()
-                setIsReady(true);
+            let startDate = new Date(currentTripData.startDate);
+            let endDate = new Date(currentTripData.endDate);
+            endDate.setDate(endDate.getDate() + 1);
+            let currentDate = startDate;
+            while (currentDate <= endDate) {
+                let date = new Date(currentDate);
+                dateFrame.push(date);
+                currentDate.setDate(currentDate.getDate() + 1);
             }
+            setDates(dateFrame);
+
+            // go through the currentTripData.events object
+            for (const key in currentTripData.events) {
+                // check if the populated arrays, and change the startTime and endTime to Date objects if the startTime or endTime are also strings
+                if (currentTripData.events[key].length > 0) {
+                    // loop through the array, and change the startTime and endTime to Date objects
+                    for (let i = 0; i < currentTripData.events[key].length; i++) {
+                        currentTripData.events[key][i].startTime = new Date(currentTripData.events[key][i].startTime);
+                        currentTripData.events[key][i].endTime = new Date(currentTripData.events[key][i].endTime);
+                    }
+                }
+            }
+            
+            axios.post(`/addevents/${tripId}`, currentTripData
+            , {
+                headers: {
+                    "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+                }
+            })
+            .then()
+            .catch()
+            setIsReady(true);
         }
     }, [currentTripData]);
-
-    // redirect to home page
-    const redirectAddTrip = () => {
-        window.location.href = "/";
-    }
 
     // create a temporary string to hold the new trip name
     const changeTripName = (e) => {
@@ -100,13 +87,9 @@ const PlannerPage = () => {
             // check if the trip name is empty
             if (currentTripData.tripName) {
                 // if it is not empty, update the trip name in the tripData object
-                // set the tripData with the ucurrentTdated trip name
-                setCurrentTripData({
-                    ...currentTripData,
-                    tripName: currentTripData.tripName
-                });
                 updateTripData();
                 setToggleEditName(false);
+                setIsReady(false);
             } else {
                 alert("Please enter a trip name");
             }
@@ -174,7 +157,6 @@ const PlannerPage = () => {
                     </div>
                     {toggleAddEvent ? 
                         <AddEventModal 
-                        events={currentTripData.events} 
                         dates={dates} 
                         currentTripData={currentTripData} 
                         setCurrentTripData={setCurrentTripData} 
@@ -187,7 +169,7 @@ const PlannerPage = () => {
                 : 
                 <div className="planner-page__error">
                     <p>The trip you are trying to access doesn't exist or you are logged out</p>
-                    <button onClick={redirectAddTrip}>Create a Trip</button>
+                    <button onClick={() => window.location.href = "/"}>Create a Trip</button>
                 </div>
             }
         </>

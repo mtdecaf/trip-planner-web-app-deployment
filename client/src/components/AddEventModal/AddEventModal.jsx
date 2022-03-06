@@ -8,7 +8,6 @@ const AddEventModal = (props) => {
     const { tripId } = useParams();
     const [errorMessage, setErrorMessage] = useState("")
     const currentTripData = useSelector(state => state.trip.trip).find(trip => trip.tripId === tripId);
-    console.log(currentTripData);
 
     const handleSubmit = (e) => {
         e.preventDefault();
