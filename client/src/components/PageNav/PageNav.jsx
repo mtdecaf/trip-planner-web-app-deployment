@@ -2,11 +2,8 @@ import logo from "../../assets/icons/logo.png"
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import "./PageNav.scss";
-
-import store from "../../state/store";
 
 const PageNav = (props) => {
     const { pathname } = useLocation();

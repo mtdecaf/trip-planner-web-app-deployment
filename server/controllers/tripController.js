@@ -5,11 +5,12 @@ exports.addTripController = (req, res) => {
     // only contains the trip's name, start and end date,  and the generates trip id
     const startDate = new Date(req.body.date[0]);
     const endDate = new Date(req.body.date[1]);
+    console.log(req.body)
 
     let diff = Math.abs(startDate.getTime() - endDate.getTime());
     // number of days in the trip
     let days = Math.ceil(diff / (1000 * 3600 * 24));
-    const { startLocation, endLocation, tripName, email, tripId } = req.body;
+    const { startLocation, endLocation, tripName, email, tripId, events } = req.body;
     // find trip if the email and useremail match
 
     Trip.findOne({ email: req.body.email }, (err, trip) => {
@@ -25,7 +26,8 @@ exports.addTripController = (req, res) => {
                 tripName, 
                 email, 
                 tripId, 
-                days });
+                days,
+                events });
             trip.save((err) => {
                 if (err) {
                     res.status(400).send(err);

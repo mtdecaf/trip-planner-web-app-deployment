@@ -33,13 +33,38 @@ export const addTrip = (tripData) => async dispatch => {
     }
 }
 
+export const removeTrip = (tripId, authHeader) => async dispatch => {
+    try {
+        const res = await axios.delete(`/deletetrip/${tripId}`, authHeader);
+        dispatch({
+            type: TRIP_REMOVE,
+            payload: res.data
+        });
+        window.location.href = "/";
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateTrip = (tripId, currentTripData, authHeader) => async dispatch => {
+    try {
+        const res = await axios.put(`/edittrip/${tripId}`, currentTripData, authHeader);
+        dispatch({
+            type: TRIP_UPDATE,
+            payload: res.data
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const initialState = {
     trip: [],
     error: null
 };
 
 // trip data reducer
-export default (state = initialState, action) => {
+const tripReducer = (state = initialState, action) => {
     switch (action.type) {
         case TRIP_RETRIEVE:
             return {
@@ -54,7 +79,7 @@ export default (state = initialState, action) => {
         case TRIP_REMOVE:
             return {
                 ...state,
-                trip: state.trip.filter(trip => trip.tripId !== action.payload)
+                trip: state.trip.filter(trip => trip.tripId !== action.payload.tripId)
             };
         case TRIP_UPDATE:
             return {
@@ -65,3 +90,5 @@ export default (state = initialState, action) => {
             return state;
     }
 }
+
+export default tripReducer;

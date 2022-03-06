@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import axios from "../../middleware/axiosConfig";
 import { v4 as uuidv4 } from 'uuid';
 
 import './AddTripModal.scss';
@@ -46,13 +45,23 @@ const AddTripModal = (props) => {
         let endDate = new Date(date[1]);
         let diff = Math.abs(startDate.getTime() - endDate.getTime());
         let days = Math.ceil(diff / (1000 * 3600 * 24));
+        
+        // populate the events object with empty arrays for each date from the start date to the end date, including the start date and end date
+        let events = {};
+        for (let i = 0; i <= days; i++) {
+            let date = new Date(startDate.getTime() + (86400000 * i));
+            date = convertDay(date.getDay());
+            events[date] = [];
+        }
+
         let tripData = {
             date,
             startLocation,
             endLocation,
             tripName: tripName.value,
             email,
-            tripId
+            tripId,
+            events
         }
 
         if(days <= 7) {
@@ -64,6 +73,27 @@ const AddTripModal = (props) => {
         }
     }
 
+    const convertDay = (day) => {
+        // convert the day number to monday, tuesday, etc.
+        switch (day) {
+            case 0:
+                return "Sunday";
+            case 1:
+                return "Monday";
+            case 2:
+                return "Tuesday";
+            case 3:
+                return "Wednesday";
+            case 4:
+                return "Thursday";
+            case 5:
+                return "Friday";
+            case 6:
+                return "Saturday";
+            default:
+                return "";
+        }
+    }
 
     const handleChange = (e) => {
         // Changes the state of the start location and end location

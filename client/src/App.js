@@ -33,8 +33,8 @@ function App() {
         if (token) {
             // dispatch authendicate action and then check if the user is authenticated
             store.dispatch(authendicate(authHeader));
+            store.dispatch(retrieveTrip(authHeader));
         }
-        store.dispatch(retrieveTrip(authHeader));
     }, [token]);
     
     useEffect(() => {
