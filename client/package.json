@@ -4,33 +4,35 @@
   "private": true,
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.8",
-    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
-    "history": "^5.2.0",
-    "mapbox-gl": "^2.6.1",
+    "history": "^5.3.0",
+    "mapbox-gl": "^2.7.0",
     "react": "^17.0.2",
-    "react-calendar": "^3.5.0",
+    "react-calendar": "^3.7.0",
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.19",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.2.2",
     "react-scripts": "4.0.3",
     "react-timetable-events": "^1.1.0",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
-    "sass": "^1.43.4",
+    "sass": "^1.49.9",
     "save-dev": "0.0.1-security",
-    "use-places-autocomplete": "^1.10.1",
+    "use-places-autocomplete": "^1.11.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2",
     "worker-loader": "^3.0.8"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "next start",
+    "lint": "next lint",
+    "dev": "next dev",
+    "build": "next build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }
