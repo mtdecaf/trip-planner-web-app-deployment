@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "./LogIn.scss";
+import "./LogIn.module.scss";
 
 import store from '../../state/store';
 import { login } from "../../state/features/auth";

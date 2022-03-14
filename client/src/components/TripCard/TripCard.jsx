@@ -1,4 +1,4 @@
-import "./TripCard.scss";
+import "./TripCard.module.scss";
 
 const TripCard = (props) => {
     const openTrip = () => {

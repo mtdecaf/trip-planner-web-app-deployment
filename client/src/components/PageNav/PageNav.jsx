@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-import "./PageNav.scss";
+import "./PageNav.module.scss";
 
 const PageNav = (props) => {
     const { pathname } = useLocation();

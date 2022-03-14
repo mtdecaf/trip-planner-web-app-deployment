@@ -1,5 +1,5 @@
 import backgroundImage from '../../assets/images/landing-background.jpeg';
-import "./Landing.scss";
+import "./Landing.module.scss";
 
 const Landing = () => {
     return (

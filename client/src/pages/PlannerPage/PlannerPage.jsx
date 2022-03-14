@@ -1,4 +1,4 @@
-import "./PlannerPage.scss";
+import "./PlannerPage.module.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Timetable from 'react-timetable-events'

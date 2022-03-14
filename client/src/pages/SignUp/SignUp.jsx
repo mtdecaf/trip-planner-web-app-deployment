@@ -2,7 +2,7 @@ import axios from "../../middleware/axiosConfig";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./SignUp.scss";
+import "./SignUp.module.scss";
 
 const UserAuth = () => {
     // states for the form for creating a new user

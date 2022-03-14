@@ -1,8 +1,7 @@
-@use "../../styles/global.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 @use "../../styles/partials/colors.scss" as *;
 
-.sign-up{
+.log-in{
     height: calc(100vh - 6.5rem);
     background-color: $primary-beige;
     display: flex;
@@ -12,7 +11,7 @@
     }
     &__wrap{
         background-color: white;
-        height: 24rem;
+        height: 20rem;
         margin-top:7rem;
         width: 80%;
         border-radius: 25px;
@@ -33,7 +32,7 @@
         margin: 1rem 0;
         @include tablet{
             font-size: 2.25rem;
-            margin:0 3rem 10rem 0;
+            margin:0 3rem 6rem 0;
         }
     }
     &__error{
@@ -45,11 +44,11 @@
         margin: 0 1.5rem;
 
         &-label{
-            margin: 0.05rem 0;
             text-align: start;
             font-weight: 600;
+            margin: 0.05rem 0;
             @include tablet{
-                margin: 0.1rem 0;
+                margin: 0.15rem 0;
             }
         }
         &-input{
@@ -59,9 +58,9 @@
             @include tablet{
                 margin: 0.2rem 0;
             }
-            
         }
         &-button{
+            text-decoration: none;
             @include button-styling;
         }
     }

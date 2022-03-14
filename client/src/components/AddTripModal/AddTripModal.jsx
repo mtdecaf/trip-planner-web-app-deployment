@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { v4 as uuidv4 } from 'uuid';
 
-import './AddTripModal.scss';
+import './AddTripModal.module.scss';
 
 // import state
 import { useSelector } from "react-redux";
