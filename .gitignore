@@ -6,6 +6,7 @@ config.json
 /.pnp
 .pnp.js
 .env
+.next
 
 # testing
 /coverage
