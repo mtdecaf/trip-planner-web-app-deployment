@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import "./AddEventModal.module.scss";
+import styles from "./AddEventModal.module.scss";
 
 const AddEventModal = (props) => {
     const [errorMessage, setErrorMessage] = useState("")
@@ -78,11 +78,11 @@ const AddEventModal = (props) => {
         props.setToggleAddEvent();
     }
     return (
-        <div className="add-event">
-            <div className="add-event__modal">
-                <h1 className="add-event__modal-title">Add Event</h1>
-                <form className="add-event__form" onSubmit={handleSubmit}>
-                    <select className="add-event__select add-event__element add-event__input" name="eventDay" id="event-day">
+        <div className={styles.add-event}>
+            <div className={styles.add-event__modal}>
+                <h1 className={styles.add-event__modal-title}>Add Event</h1>
+                <form className={styles.add-event__form} onSubmit={handleSubmit}>
+                    <select className={`${styles.add-event__select}` `${styles.add-event__element}` `${styles.add-event__input}`} name="eventDay" id="event-day">
                         <option value="">Select a day</option>
                         {
                             Object.keys(props.currentTripData.events).map((day, index) => {
@@ -90,7 +90,7 @@ const AddEventModal = (props) => {
                             })
                         }
                     </select>
-                    <select className="add-event__select add-event__element add-event__input" name="eventType" id="event-type">
+                    <select className={`${styles.add-event__select}` `${styles.add-event__element}` `${styles.add-event__input}`} name="eventType" id="event-type">
                         {/* list of road trip activities */}
                         <option value="">Select an event type</option>
                         <option value="food">🍔Food</option>
@@ -102,23 +102,23 @@ const AddEventModal = (props) => {
                         <option value="other">🤷‍♂️Other</option>
                     </select>
                     {/* input for event description */}
-                    <label className="add-event__label" htmlFor="eventDescription">Event Description</label>
-                    <input className="add-event__input add-event__element" type="text" name="eventDescription" id="event-description" placeholder="Event Description" />
+                    <label className={styles.add-event__label} htmlFor="eventDescription">Event Description</label>
+                    <input className={`${styles.add-event__input}` `${styles.add-event__element}`} type="text" name="eventDescription" id="event-description" placeholder="Event Description" />
                     {/* input for event time */}
-                    <label className="add-event__label" htmlFor="startTime">Start Time</label>
-                    <input className="add-event__input add-event__element" type="time" name="startTime" id="startTime" />
-                    <label className="add-event__label" htmlFor="endTime">End Time</label>
-                    <input className="add-event__input add-event__element" type="time" name="endTime" id="endTime" />
+                    <label className={add-event__label} htmlFor="startTime">Start Time</label>
+                    <input className={`${styles.add-event__input}` `${styles.add-event__element}`} type="time" name="startTime" id="startTime" />
+                    <label className={add-event__label} htmlFor="endTime">End Time</label>
+                    <input className={`${styles.add-event__input}` `${styles.add-event__element}`} type="time" name="endTime" id="endTime" />
                     {/* input for event location */}
-                    <label className="add-event__label" htmlFor="eventLocation">Location</label>
-                    <input className="add-event__input add-event__element" type="text" name="eventLocation" id="event-location" placeholder="Location" />
+                    <label className={add-event__label} htmlFor="eventLocation">Location</label>
+                    <input className={`${styles.add-event__input}` `${styles.add-event__element}`} type="text" name="eventLocation" id="event-location" placeholder="Location" />
                     {/* input for event price */}
-                    <label className="add-event__label" htmlFor="price">Price</label>
-                    <input className="add-event__input add-event__element" type="number" min="0" step=".01" name="price" id="price" placeholder="Price" />
+                    <label className={add-event__label} htmlFor="price">Price</label>
+                    <input className={`${styles.add-event__input}` `${styles.add-event__element}`} type="number" min="0" step=".01" name="price" id="price" placeholder="Price" />
                     {/* submit */}
-                    {errorMessage && <p className="add-event__error">{errorMessage}</p>}
-                    <button className="add-event__button" type="submit">Add Event</button>
-                    <button className="add-event__button" onClick={handleCancel}>Cancel</button>
+                    {errorMessage && <p className={styles.add-event__error}>{errorMessage}</p>}
+                    <button className={styles.add-event__button} type="submit">Add Event</button>
+                    <button className={styles.add-event__button} onClick={handleCancel}>Cancel</button>
                 </form>
             </div>
         </div>

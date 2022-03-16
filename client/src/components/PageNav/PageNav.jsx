@@ -1,12 +1,14 @@
 import logo from "../../assets/icons/logo.png"
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
-import "./PageNav.module.scss";
+import styles from "./PageNav.module.scss";
 
 const PageNav = (props) => {
-    const { pathname } = useLocation();
+    const { pathname } = useRouter();
     // handle log out
     const logOut = () => {
         sessionStorage.removeItem("token");
@@ -32,25 +34,31 @@ const PageNav = (props) => {
     // if the user is logged in, show the logout button and user name
     if (!props.isAuthenticated) {
         return (
-            <div className="page-nav">
-                <div className="page-nav__logo-wrap">
-                    <Link className="page-nav__logo-link" to="/"><img className="page-nav__logo" src={logo} alt="logo" /></Link>
-                </div>
-                <div className="page-nav__profile">
-                    <Link className="page-nav__signup page-nav__button" id="signup" to="/signup">Sign Up</Link>
-                    <Link className="page-nav__login page-nav__button"id="login" to="/login">Log In</Link>
-                </div>
+            <div className={styles["page-nav"]}>
+                <ul className={styles["page-nav__logo-wrap"]}>
+                    <li>
+                        <Link className={styles["page-nav__logo-link"]} href="/"><a><img className={styles["page-nav__logo"]} src={logo} alt="logo" /></a></Link>
+                    </li>
+                </ul>
+                <ul className={styles["page-nav__profile"]}>
+                    <li>
+                        <Link id="signup" href="/signup"><a className={[styles["page-nav__signup"], styles["page-nav__button"]].join(' ')}>Sign Up</a></Link>
+                    </li>
+                    <li>
+                        <Link id="login" href="/login"><a className={[styles["page-nav__login"], styles["page-nav__button"]].join(' ')}>Log In</a></Link>
+                    </li>
+                </ul>
             </div>
         );
     } else {
         return (
-            <div className="page-nav">
-                <div className="page-nav__logo-wrap">
-                    <Link className="page-nav__logo-link" to="/"><img className="page-nav__logo" src={logo} alt="logo" /></Link>
+            <div className={styles[page-nav]}>
+                <div className={styles[page-nav__logo-wrap]}>
+                    <Link className={styles[page-nav__logo-link]} href="/"><a><img className={styles[page-nav__logo]} src={logo} alt="logo" /></a></Link>
                 </div>
-                <div className="page-nav__profile">
-                    <Link to="/" className="page-nav__username page-nav__button">{props.username}</Link>
-                    <Link to="/" onClick={logOut} className="page-nav__log-out page-nav__button">Log Out</Link>
+                <div className={styles.page-nav__profile}>
+                    <Link className={[styles[page-nav__username], styles[page-nav__button]].join(' ')} href="/"><a>{props.username}</a></Link>
+                    <Link className={[styles[page-nav__log-out], styles[page-nav__button]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
                 </div>
             </div>
         );

@@ -1,4 +1,4 @@
-import "./Dashboard.module.scss"
+import styles from "./Dashboard.module.scss"
 import { useState, useEffect } from "react";
 import ReactMapGL from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
