@@ -1,6 +1,5 @@
-import logo from "../../assets/icons/logo.png"
-// import { Link } from "react-router-dom";
-// import { useLocation } from "react-router-dom";
+import logo from "../../../public/icons/logo.png"
+import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -37,7 +36,7 @@ const PageNav = (props) => {
             <div className={styles["page-nav"]}>
                 <ul className={styles["page-nav__logo-wrap"]}>
                     <li>
-                        <Link className={styles["page-nav__logo-link"]} href="/"><a><img className={styles["page-nav__logo"]} src={logo} alt="logo" /></a></Link>
+                        <Link className={styles["page-nav__logo-link"]} href="/"><a><Image className={styles["page-nav__logo"]} src={logo} alt="logo" /></a></Link>
                     </li>
                 </ul>
                 <ul className={styles["page-nav__profile"]}>

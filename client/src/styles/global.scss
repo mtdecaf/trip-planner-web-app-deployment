@@ -10,4 +10,7 @@
 body{
     font-family: $font-stack;
     background-color: $primary-beige;
+    ul {
+        list-style: none;
+    }
 }
