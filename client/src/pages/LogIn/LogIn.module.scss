@@ -29,7 +29,7 @@
     &__title{
         color: $text-light;
         font-size: 1.75rem;
-        margin: 1rem 0;
+        margin: 2.5rem 1.5rem 1rem 1.5rem;
         @include tablet{
             font-size: 2.25rem;
             margin:0 3rem 6rem 0;
@@ -61,6 +61,7 @@
         }
         &-button{
             text-decoration: none;
+            text-align: center;
             @include button-styling;
         }
     }

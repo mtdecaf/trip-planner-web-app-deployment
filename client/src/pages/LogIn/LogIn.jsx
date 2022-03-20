@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import Link from "next/link";
 import { connect } from "react-redux";
 
-import "./LogIn.module.scss";
+import styles from "./LogIn.module.scss";
 
 import store from '../../state/store';
 import { login } from "../../state/features/auth";
@@ -42,18 +42,18 @@ const LogIn = () => {
     };
 
     return (
-        <div className="log-in">
-            <div className="log-in__wrap">
-                <h1 className="log-in__title">Log In</h1>
-                <form className="log-in__form" onSubmit={handleSubmit}>
-                    <label className="log-in__form-label">Email:</label>
-                    <input className="log-in__form-input" type="text" name="email" onChange={handleChange} value={user.email} />
-                    <label className="log-in__form-label">Password:</label>
-                    <input className="log-in__form-input" type="password" name="password" onChange={handleChange} value={user.password} />
-                    {errorMessage && <p className="log-in__error">{errorMessage}</p>}
+        <div className={styles["log-in"]}>
+            <div className={styles["log-in__wrap"]}>
+                <h1 className={styles["log-in__title"]}>Log In</h1>
+                <form className={styles["log-in__form"]} onSubmit={handleSubmit}>
+                    <label className={styles["log-in__form-label"]}>Email:</label>
+                    <input className={styles["log-in__form-input"]} type="text" name="email" onChange={handleChange} value={user.email} />
+                    <label className={styles["log-in__form-label"]}>Password:</label>
+                    <input className={styles["log-in__form-input"]} type="password" name="password" onChange={handleChange} value={user.password} />
+                    {errorMessage && <p className={styles["log-in__error"]}>{errorMessage}</p>}
                     {/* if the user is logged in, redirect to the home page */}
                     {/* {isAuthenticated ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />} */}
-                    <Link href="/" className="log-in__form-button"><a>Cancel</a></Link>
+                    <Link href="/"><a className={styles["log-in__form-button"]}>Cancel</a></Link>
                 </form>
             </div>
         </div>
