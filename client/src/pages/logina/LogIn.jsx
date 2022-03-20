@@ -52,7 +52,7 @@ const LogIn = () => {
                     <input className={styles["log-in__form-input"]} type="password" name="password" onChange={handleChange} value={user.password} />
                     {errorMessage && <p className={styles["log-in__error"]}>{errorMessage}</p>}
                     {/* if the user is logged in, redirect to the home page */}
-                    {/* {isAuthenticated ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />} */}
+                    {<input className={styles["log-in__form-button"]} type="submit" value="Log In" />}
                     <Link href="/"><a className={styles["log-in__form-button"]}>Cancel</a></Link>
                 </form>
             </div>
