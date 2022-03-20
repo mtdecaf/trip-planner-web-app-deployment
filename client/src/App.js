@@ -6,7 +6,7 @@ import PageNav from './components/PageNav/PageNav';
 import HomePage from './pages/HomePage/HomePage';
 import PlannerPage from './pages/PlannerPage/PlannerPage';
 import SignUp from './pages/SignUp/SignUp';
-import LogIn from './pages/LogIn/LogIn';
+import LogIn from './pages/login/LogIn';
 
 import store from './state/store';
 import { authendicate } from "./state/features/auth";

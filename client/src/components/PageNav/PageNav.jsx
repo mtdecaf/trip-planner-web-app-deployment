@@ -35,7 +35,7 @@ const PageNav = (props) => {
         return (
             <div className={styles["page-nav"]}>
                 <ul className={styles["page-nav__logo-wrap"]}>
-                    <li>
+                    <li className={styles["page-nav__list"]}>
                         <Link className={styles["page-nav__logo-link"]} href="/">
                             <a>
                                 <div className={styles["page-nav__logo"]}>
@@ -58,13 +58,19 @@ const PageNav = (props) => {
     } else {
         return (
             <div className={styles[page-nav]}>
-                <div className={styles[page-nav__logo-wrap]}>
-                    <Link className={styles[page-nav__logo-link]} href="/"><a><img className={styles[page-nav__logo]} src={logo} alt="logo" /></a></Link>
-                </div>
-                <div className={styles.page-nav__features}>
-                    <Link className={[styles[page-nav__username], styles[page-nav__button]].join(' ')} href="/"><a>{props.username}</a></Link>
-                    <Link className={[styles[page-nav__log-out], styles[page-nav__button]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
-                </div>
+                <ul className={styles[page-nav__logo-wrap]}>
+                    <li className={styles["page-nav__list"]}>
+                        <Link className={styles[page-nav__logo-link]} href="/"><a><img className={styles[page-nav__logo]} src={logo} alt="logo" /></a></Link>
+                    </li>
+                </ul>
+                <ul className={styles.page-nav__features}>
+                    <li className={styles["page-nav__list"]}>
+                        <Link className={[styles[page-nav__username], styles[page-nav__button]].join(' ')} href="/"><a>{props.username}</a></Link>
+                    </li>
+                    <li className={styles["page-nav__list"]}>
+                        <Link className={[styles[page-nav__log-out], styles[page-nav__button]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
+                    </li>
+                </ul>
             </div>
         );
     }
