@@ -36,14 +36,20 @@ const PageNav = (props) => {
             <div className={styles["page-nav"]}>
                 <ul className={styles["page-nav__logo-wrap"]}>
                     <li>
-                        <Link className={styles["page-nav__logo-link"]} href="/"><a><Image className={styles["page-nav__logo"]} src={logo} alt="logo" /></a></Link>
+                        <Link className={styles["page-nav__logo-link"]} href="/">
+                            <a>
+                                <div className={styles["page-nav__logo"]}>
+                                    <Image src={logo} alt="logo" />
+                                </div>
+                            </a>
+                        </Link>
                     </li>
                 </ul>
-                <ul className={styles["page-nav__profile"]}>
-                    <li>
+                <ul className={styles["page-nav__features"]}>
+                    <li className={styles["page-nav__list"]}>
                         <Link id="signup" href="/signup"><a className={[styles["page-nav__signup"], styles["page-nav__button"]].join(' ')}>Sign Up</a></Link>
                     </li>
-                    <li>
+                    <li className={styles["page-nav__list"]}>
                         <Link id="login" href="/login"><a className={[styles["page-nav__login"], styles["page-nav__button"]].join(' ')}>Log In</a></Link>
                     </li>
                 </ul>
@@ -55,7 +61,7 @@ const PageNav = (props) => {
                 <div className={styles[page-nav__logo-wrap]}>
                     <Link className={styles[page-nav__logo-link]} href="/"><a><img className={styles[page-nav__logo]} src={logo} alt="logo" /></a></Link>
                 </div>
-                <div className={styles.page-nav__profile}>
+                <div className={styles.page-nav__features}>
                     <Link className={[styles[page-nav__username], styles[page-nav__button]].join(' ')} href="/"><a>{props.username}</a></Link>
                     <Link className={[styles[page-nav__log-out], styles[page-nav__button]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
                 </div>
