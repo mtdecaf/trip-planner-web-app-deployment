@@ -1,8 +1,8 @@
 import axios from "../../middleware/axiosConfig";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-import "./SignUp.module.scss";
+import styles from "./SignUp.module.scss";
 
 const UserAuth = () => {
     // states for the form for creating a new user
@@ -68,21 +68,21 @@ const UserAuth = () => {
     };
 
     return (
-        <div className="sign-up">
-            <div className="sign-up__wrap">
-                <h1 className="sign-up__title">Sign Up</h1>
-                <form className="sign-up__form" action="userSignUp" onSubmit={handleSubmit}>
-                    <label className="sign-up__form-label" htmlFor="username">Username<span>*</span></label>
-                    <input className="sign-up__form-input" type="text" name="username" id="username" onChange={handleChange} value={ user.username } />
-                    <label className="sign-up__form-label" htmlFor="email">Email<span>*</span></label>
-                    <input className="sign-up__form-input" type="text" name="email" id="email" onChange={handleChange} value={ user.email } />
-                    <label className="sign-up__form-label" htmlFor="password">Password<span>*</span></label>
-                    <input className="sign-up__form-input" type="password" name="password" id="password" onChange={handleChange} />
-                    <label className="sign-up__form-label" htmlFor="passwordConfirmation">Confirm Password*</label>
-                    <input className="sign-up__form-input" type="password" name="passwordConfirmation" id="passwordConfirmation" onChange={handleChange} />
-                    {errorMessage && <p className="sign-up__error">{errorMessage}</p>}
-                    <input className="sign-up__form-button" type="submit" value="Sign Up" />
-                    <Link to="/" className="log-in__form-button">Cancel</Link>
+        <div className={styles["sign-up"]}>
+            <div className={styles["sign-up__wrap"]}>
+                <h1 className={styles["sign-up__title"]}>Sign Up</h1>
+                <form className={styles["sign-up__form"]} action="userSignUp" onSubmit={handleSubmit}>
+                    <label className={styles["sign-up__form-label"]} htmlFor="username">Username<span>*</span></label>
+                    <input className={styles["sign-up__form-input"]} type="text" name="username" id="username" onChange={handleChange} value={ user.username } />
+                    <label className={styles["sign-up__form-label"]} htmlFor="email">Email<span>*</span></label>
+                    <input className={styles["sign-up__form-input"]} type="text" name="email" id="email" onChange={handleChange} value={ user.email } />
+                    <label className={styles["sign-up__form-label"]} htmlFor="password">Password<span>*</span></label>
+                    <input className={styles["sign-up__form-input"]} type="password" name="password" id="password" onChange={handleChange} />
+                    <label className={styles["sign-up__form-label"]} htmlFor="passwordConfirmation">Confirm Password*</label>
+                    <input className={styles["sign-up__form-input"]} type="password" name="passwordConfirmation" id="passwordConfirmation" onChange={handleChange} />
+                    {errorMessage && <p className={styles["sign-up__error"]}>{errorMessage}</p>}
+                    <input className={styles["sign-up__form-button"]} type="submit" value="Sign Up" />
+                    <Link href="/"><a className={styles["sign-up__form-button"]}>Cancel</a></Link>
                 </form>
             </div>
         </div>

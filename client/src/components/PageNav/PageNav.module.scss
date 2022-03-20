@@ -17,13 +17,13 @@
     }
     &__logo{
         width: 2.5rem;
-        margin-top: 0.5rem;
+        margin: 0.5rem 1rem 0 0;
+        @include tablet{
+            margin-top: 0;
+        }
         &-wrap{
             display: flex;
             justify-content: center;
-            @include tablet{
-                margin-top: 0;
-            }
         }
     }
     &__list {
