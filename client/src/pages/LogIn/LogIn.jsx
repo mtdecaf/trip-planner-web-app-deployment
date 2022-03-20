@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import Link from "next/link";
 import { connect } from "react-redux";
 
 import "./LogIn.module.scss";
@@ -51,8 +52,8 @@ const LogIn = () => {
                     <input className="log-in__form-input" type="password" name="password" onChange={handleChange} value={user.password} />
                     {errorMessage && <p className="log-in__error">{errorMessage}</p>}
                     {/* if the user is logged in, redirect to the home page */}
-                    {isAuthenticated ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />}
-                    <Link to="/" className="log-in__form-button">Cancel</Link>
+                    {/* {isAuthenticated ? <Navigate to="/" /> : <input className="log-in__form-button" type="submit" value="Log In" />} */}
+                    <Link href="/" className="log-in__form-button"><a>Cancel</a></Link>
                 </form>
             </div>
         </div>

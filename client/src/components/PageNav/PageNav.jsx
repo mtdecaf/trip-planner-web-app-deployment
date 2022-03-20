@@ -15,17 +15,17 @@ const PageNav = (props) => {
     }
     useEffect(() => {
         if (pathname === "/signup") {
-            document.getElementById("signup").classList.add("page-nav__button--active");
-            document.getElementById("login").classList.remove("page-nav__button--active");
+            document.getElementById("signup").classList.add(styles["page-nav__button--active"]);
+            document.getElementById("login").classList.remove(styles["page-nav__button--active"]);
         } else if (pathname === "/login") {
-            document.getElementById("login").classList.add("page-nav__button--active");
-            document.getElementById("signup").classList.remove("page-nav__button--active");
+            document.getElementById("login").classList.add(styles["page-nav__button--active"]);
+            document.getElementById("signup").classList.remove(styles["page-nav__button--active"]);
         } else if (document.getElementById("login")) {
-            if (document.getElementById("login").classList.contains("page-nav__button--active")) {
-                document.getElementById("login").classList.remove("page-nav__button--active");
+            if (document.getElementById("login").classList.contains(styles["page-nav__button--active"])) {
+                document.getElementById("login").classList.remove(styles["page-nav__button--active"]);
             }
-            if (document.getElementById("signup").classList.contains("page-nav__button--active")) {
-                document.getElementById("signup").classList.remove("page-nav__button--active");
+            if (document.getElementById("signup").classList.contains(styles["page-nav__button--active"])) {
+                document.getElementById("signup").classList.remove(styles["page-nav__button--active"]);
             }
         }
     }, [pathname]);
@@ -46,11 +46,11 @@ const PageNav = (props) => {
                     </li>
                 </ul>
                 <ul className={styles["page-nav__features"]}>
-                    <li className={styles["page-nav__list"]}>
-                        <Link id="signup" href="/signup"><a className={[styles["page-nav__signup"], styles["page-nav__button"]].join(' ')}>Sign Up</a></Link>
+                    <li className={[styles["page-nav__list"], styles["page-nav__list-features"]].join(' ')}>
+                        <Link  href="/signup"><a id="signup" className={[styles["page-nav__signup"], styles["page-nav__button"]].join(' ')}>Sign Up</a></Link>
                     </li>
-                    <li className={styles["page-nav__list"]}>
-                        <Link id="login" href="/login"><a className={[styles["page-nav__login"], styles["page-nav__button"]].join(' ')}>Log In</a></Link>
+                    <li className={[styles["page-nav__list"], styles["page-nav__list-features"]].join(' ')}>
+                        <Link  href="/login"><a id="login" className={[styles["page-nav__login"], styles["page-nav__button"]].join(' ')}>Log In</a></Link>
                     </li>
                 </ul>
             </div>
@@ -64,10 +64,10 @@ const PageNav = (props) => {
                     </li>
                 </ul>
                 <ul className={styles.page-nav__features}>
-                    <li className={styles["page-nav__list"]}>
+                    <li className={[styles["page-nav__list"], styles["page-nav__list-features"]].join(' ')}>
                         <Link className={[styles[page-nav__username], styles[page-nav__button]].join(' ')} href="/"><a>{props.username}</a></Link>
                     </li>
-                    <li className={styles["page-nav__list"]}>
+                    <li className={[styles["page-nav__list"], styles["page-nav__list-features"]].join(' ')}>
                         <Link className={[styles[page-nav__log-out], styles[page-nav__button]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
                     </li>
                 </ul>
