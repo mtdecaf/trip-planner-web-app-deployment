@@ -7,6 +7,7 @@ import Link from 'next/link'
 import styles from "./PageNav.module.scss";
 
 const PageNav = (props) => {
+    console.log(props.isAuthenticated)
     const { pathname } = useRouter();
     // handle log out
     const logOut = () => {

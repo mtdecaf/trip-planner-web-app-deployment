@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
 import Link from "next/link";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 import styles from "./LogIn.module.scss";
 
-import store from '../../state/store';
 import { login } from "../../state/features/auth";
 
 const LogIn = () => {
+    const dispatch = useDispatch()
     // states for the form for logging in
     const [user, setUser] = useState({
         email: "",
         password: ""
     });
-    const isAuthenticated = store.getState().auth.isAuthenticated;
-    const [errorMessage, setErrorMessage] = useState("")
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = e => {
         setUser({
@@ -26,6 +25,7 @@ const LogIn = () => {
 
     // handle form submission
     const handleSubmit = e => {
+        console.log("handleSubmit");
         e.preventDefault();
         const { email, password } = user;
         if (!email){
@@ -36,9 +36,7 @@ const LogIn = () => {
         if (!password){
             setErrorMessage("Please enter a password");
         }
-        store.dispatch(
-            login(email, password)
-        );
+        dispatch(login(email, password));
     };
 
     return (
@@ -52,7 +50,7 @@ const LogIn = () => {
                     <input className={styles["log-in__form-input"]} type="password" name="password" onChange={handleChange} value={user.password} />
                     {errorMessage && <p className={styles["log-in__error"]}>{errorMessage}</p>}
                     {/* if the user is logged in, redirect to the home page */}
-                    {<input className={styles["log-in__form-button"]} type="submit" value="Log In" />}
+                    <button className={styles["log-in__form-button"]} type="submit">Log In</button>
                     <Link href="/"><a className={styles["log-in__form-button"]}>Cancel</a></Link>
                 </form>
             </div>
