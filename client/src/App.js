@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import PageNav from './components/PageNav/PageNav';
-import HomePage from './pages/HomePage/HomePage';
+import HomePage from './pages/home/Home';
 import PlannerPage from './pages/PlannerPage/PlannerPage';
 import SignUp from './pages/SignUp/SignUp';
 import LogIn from './pages/login/LogIn';

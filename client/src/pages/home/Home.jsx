@@ -1,10 +1,10 @@
 import Dashboard from "../../components/Dashboard/Dashboard"
 import Landing from "../../components/Landing/Landing"
 
-const HomePage = (props) => {
+const Home = (props) => {
     return (
         props.isAuthenticated ? <Dashboard addTripDisplay={props.addTripDisplay} /> : <Landing />
     )
 }
 
-export default HomePage;
+export default Home;
