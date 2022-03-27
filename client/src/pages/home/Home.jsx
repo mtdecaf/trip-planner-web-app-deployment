@@ -1,5 +1,3 @@
-import styles from "./HomePage.module.scss"
-
 import Dashboard from "../../components/Dashboard/Dashboard"
 import Landing from "../../components/Landing/Landing"
 

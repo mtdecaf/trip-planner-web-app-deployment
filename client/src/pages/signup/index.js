@@ -1,7 +1,1 @@
-import SignUp from './SignUp';
-
-const SignUpPage = () => {
-    return <SignUp />;
-};
-
-export default SignUpPage;
+export {default} from "./SignUp"
