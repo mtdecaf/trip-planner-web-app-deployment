@@ -1,16 +1,7 @@
-export const middleware = async (request, event) => {
-    console.log("hello");
-    // const token = localStorage.getItem('token');
-    // console.log(token)
-    // const authHeader = {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`
-    //     }
-    // };
+import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
-    // if (token) {
-    //     // dispatch authendicate action and then check if the user is authenticated
-    //     store.dispatch(authendicate(authHeader));
-    //     store.dispatch(retrieveTrip(authHeader));
-    // }
+const middleware = async (request, event) => {
+    new Response(request.ua.os.name);
 }
+
+export default middleware;

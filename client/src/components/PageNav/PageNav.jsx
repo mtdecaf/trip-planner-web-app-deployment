@@ -1,13 +1,12 @@
 import logo from "../../../public/icons/logo.png"
 import Image from "next/image";
 import { useEffect } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Link from 'next/link'
 
 import styles from "./PageNav.module.scss";
 
 const PageNav = (props) => {
-    console.log(props.isAuthenticated)
     const { pathname } = useRouter();
     // handle log out
     const logOut = () => {
@@ -58,18 +57,18 @@ const PageNav = (props) => {
         );
     } else {
         return (
-            <div className={styles[page-nav]}>
-                <ul className={styles[page-nav__logo-wrap]}>
+            <div className={styles["page-nav"]}>
+                <ul className={styles["page-nav__logo-wrap"]}>
                     <li className={styles["page-nav__list"]}>
-                        <Link className={styles[page-nav__logo-link]} href="/"><a><img className={styles[page-nav__logo]} src={logo} alt="logo" /></a></Link>
+                        <Link className={styles["page-nav__logo-link"]} href="/"><a><img className={styles["page-nav__logo"]} src={logo} alt="logo" /></a></Link>
                     </li>
                 </ul>
-                <ul className={styles.page-nav__features}>
+                <ul className={styles["page-nav__features"]}>
                     <li className={[styles["page-nav__list"], styles["page-nav__list-features"]].join(' ')}>
-                        <Link className={[styles[page-nav__username], styles[page-nav__button]].join(' ')} href="/"><a>{props.username}</a></Link>
+                        <Link className={[styles["page-nav__username"], styles["page-nav__button"]].join(' ')} href="/"><a>{props.username}</a></Link>
                     </li>
                     <li className={[styles["page-nav__list"], styles["page-nav__list-features"]].join(' ')}>
-                        <Link className={[styles[page-nav__log-out], styles[page-nav__button]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
+                        <Link className={[styles["page-nav__log-out"], styles["page-nav__button"]].join(' ')}  href="/" onClick={logOut} ><a>Log Out</a></Link>
                     </li>
                 </ul>
             </div>
