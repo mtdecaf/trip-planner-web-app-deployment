@@ -1,9 +1,7 @@
-import "../App.scss";
 import "../styles/global.scss";
 import Layout from "../components/layout.jsx";
 import { Provider } from "react-redux";
 import store from "../state/store";
-import { Head } from "next/document";
 
 import { useEffect } from "react";
 
