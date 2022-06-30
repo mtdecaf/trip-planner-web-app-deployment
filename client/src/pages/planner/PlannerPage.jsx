@@ -1,10 +1,13 @@
-import "./PlannerPage.module.scss";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useRouter } from 'next/router'
 import Timetable from 'react-timetable-events'
 import axios from "../../middleware/axiosConfig";
 
 import AddEventModal from "../../components/AddEventModal/AddEventModal";
+
+import styles from "./PlannerPage.module.scss";
+import classNames from "classnames/bind";
+let cx = classNames.bind(styles);
 
 // import state
 import { useSelector } from "react-redux";
@@ -12,7 +15,8 @@ import store from "../../state/store";
 import { updateTrip, removeTrip } from "../../state/features/trip";
 
 const PlannerPage = () => {
-    const { tripId } = useParams();
+    const router = useRouter()
+    const { tripId } = router.query;
     
     const [ dates, setDates ] = useState([]);
 
@@ -130,20 +134,20 @@ const PlannerPage = () => {
     return (
         <>
             {currentTripData ? 
-                <div className="planner-page">
-                    <div className="planner-page__calendar">
+                <div className={cx("planner-page")}>
+                    <div className={cx("planner-page__calendar")}>
                         <div className="calendar__header">
-                            <div className="calendar__name-wrap">
+                            <div className={cx("calendar__name-wrap")}>
                                 {!toggleEditName ? <h1 className="calendar__title">{currentTripData.tripName}</h1>:
-                                <input className="calendar__title" type="text" value={currentTripData.tripName} onChange={changeTripName}/>}
-                                <span onClick={toggleEditTripsName} className="calendar__edit"><img src="https://img.icons8.com/ios/50/000000/edit-file.png" alt="edit trip name button"/></span>
+                                <input className={cx("calendar__title")} type="text" value={currentTripData.tripName} onChange={changeTripName}/>}
+                                <span onClick={toggleEditTripsName} className={cx("calendar__edit")}><img src="https://img.icons8.com/ios/50/000000/edit-file.png" alt="edit trip name button"/></span>
                             </div>
-                            <div className="calendar__add-delete-wrap">
-                                <span onClick={addEvent} className="calendar__add"><img src="https://img.icons8.com/ios/50/000000/add--v1.png" alt="add event button"/></span>
-                                <span onClick={deleteTrip} className="calendar__delete"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png" alt="delete current trip button"/></span>
+                            <div className={cx("calendar__add-delete-wrap")}>
+                                <span onClick={addEvent} className={cx("calendar__add")}><img src="https://img.icons8.com/ios/50/000000/add--v1.png" alt="add event button"/></span>
+                                <span onClick={deleteTrip} className={cx("calendar__delete")}><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-delete-miscellaneous-kiranshastry-lineal-kiranshastry.png" alt="delete current trip button"/></span>
                             </div>
                         </div>
-                        <div className="calendar__days">
+                        <div className={cx("calendar__days")}>
                             { isReady ? 
                                 <div>
                                     <Timetable 
@@ -166,7 +170,7 @@ const PlannerPage = () => {
                     : null}
                 </div>
                 : 
-                <div className="planner-page__error">
+                <div className={cx("planner-page__error")}>
                     <p>The trip you are trying to access doesn't exist or you are logged out</p>
                     <button onClick={() => window.location.href = "/"}>Create a Trip</button>
                 </div>

@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 import styles from "./SignUp.module.scss";
+import classNames from "classnames/bind";
+let cx = classNames.bind(styles);
 
 const UserAuth = () => {
     // states for the form for creating a new user
@@ -68,21 +70,21 @@ const UserAuth = () => {
     };
 
     return (
-        <div className={styles["sign-up"]}>
-            <div className={styles["sign-up__wrap"]}>
-                <h1 className={styles["sign-up__title"]}>Sign Up</h1>
-                <form className={styles["sign-up__form"]} action="userSignUp" onSubmit={handleSubmit}>
-                    <label className={styles["sign-up__form-label"]} htmlFor="username">Username<span>*</span></label>
-                    <input className={styles["sign-up__form-input"]} type="text" name="username" id="username" onChange={handleChange} value={ user.username } />
-                    <label className={styles["sign-up__form-label"]} htmlFor="email">Email<span>*</span></label>
-                    <input className={styles["sign-up__form-input"]} type="text" name="email" id="email" onChange={handleChange} value={ user.email } />
-                    <label className={styles["sign-up__form-label"]} htmlFor="password">Password<span>*</span></label>
-                    <input className={styles["sign-up__form-input"]} type="password" name="password" id="password" onChange={handleChange} />
-                    <label className={styles["sign-up__form-label"]} htmlFor="passwordConfirmation">Confirm Password*</label>
-                    <input className={styles["sign-up__form-input"]} type="password" name="passwordConfirmation" id="passwordConfirmation" onChange={handleChange} />
-                    {errorMessage && <p className={styles["sign-up__error"]}>{errorMessage}</p>}
-                    <input className={styles["sign-up__form-button"]} type="submit" value="Sign Up" />
-                    <Link href="/"><a className={styles["sign-up__form-button"]}>Cancel</a></Link>
+        <div className={cx("sign-up")}>
+            <div className={cx("sign-up__wrap")}>
+                <h1 className={cx("sign-up__title")}>Sign Up</h1>
+                <form className={cx("sign-up__form")} action="userSignUp" onSubmit={handleSubmit}>
+                    <label className={cx("sign-up__form-label")} htmlFor="username">Username<span>*</span></label>
+                    <input className={cx("sign-up__form-input")} type="text" name="username" id="username" onChange={handleChange} value={ user.username } />
+                    <label className={cx("sign-up__form-label")} htmlFor="email">Email<span>*</span></label>
+                    <input className={cx("sign-up__form-input")} type="text" name="email" id="email" onChange={handleChange} value={ user.email } />
+                    <label className={cx("sign-up__form-label")} htmlFor="password">Password<span>*</span></label>
+                    <input className={cx("sign-up__form-input")} type="password" name="password" id="password" onChange={handleChange} />
+                    <label className={cx("sign-up__form-label")} htmlFor="passwordConfirmation">Confirm Password*</label>
+                    <input className={cx("sign-up__form-input")} type="password" name="passwordConfirmation" id="passwordConfirmation" onChange={handleChange} />
+                    {errorMessage && <p className={cx("sign-up__error")}>{errorMessage}</p>}
+                    <input className={cx("sign-up__form-button")} type="submit" value="Sign Up" />
+                    <Link href="/"><a className={cx("sign-up__form-button")}>Cancel</a></Link>
                 </form>
             </div>
         </div>

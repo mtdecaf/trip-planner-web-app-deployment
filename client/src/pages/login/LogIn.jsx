@@ -3,6 +3,8 @@ import Link from "next/link";
 import { connect, useSelector, useDispatch } from "react-redux";
 
 import styles from "./LogIn.module.scss";
+import classNames from "classnames/bind";
+let cx = classNames.bind(styles);
 
 import { login } from "../../state/features/auth";
 
@@ -40,18 +42,18 @@ const LogIn = () => {
     };
 
     return (
-        <div className={styles["log-in"]}>
-            <div className={styles["log-in__wrap"]}>
-                <h1 className={styles["log-in__title"]}>Log In</h1>
-                <form className={styles["log-in__form"]} onSubmit={handleSubmit}>
-                    <label className={styles["log-in__form-label"]}>Email:</label>
-                    <input className={styles["log-in__form-input"]} type="text" name="email" onChange={handleChange} value={user.email} />
-                    <label className={styles["log-in__form-label"]}>Password:</label>
-                    <input className={styles["log-in__form-input"]} type="password" name="password" onChange={handleChange} value={user.password} />
-                    {errorMessage && <p className={styles["log-in__error"]}>{errorMessage}</p>}
+        <div className={cx("log-in")}>
+            <div className={cx("log-in__wrap")}>
+                <h1 className={cx("log-in__title")}>Log In</h1>
+                <form className={cx("log-in__form")} onSubmit={handleSubmit}>
+                    <label className={cx("log-in__form-label")}>Email:</label>
+                    <input className={cx("log-in__form-input")} type="text" name="email" onChange={handleChange} value={user.email} />
+                    <label className={cx("log-in__form-label")}>Password:</label>
+                    <input className={cx("log-in__form-input")} type="password" name="password" onChange={handleChange} value={user.password} />
+                    {errorMessage && <p className={cx("log-in__error")}>{errorMessage}</p>}
                     {/* if the user is logged in, redirect to the home page */}
-                    <button className={styles["log-in__form-button"]} type="submit">Log In</button>
-                    <Link href="/"><a className={styles["log-in__form-button"]}>Cancel</a></Link>
+                    <button className={cx("log-in__form-button")} type="submit">Log In</button>
+                    <Link href="/"><a className={cx("log-in__form-button")}>Cancel</a></Link>
                 </form>
             </div>
         </div>

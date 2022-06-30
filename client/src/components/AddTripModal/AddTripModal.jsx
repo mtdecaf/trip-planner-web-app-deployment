@@ -3,7 +3,9 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { v4 as uuidv4 } from 'uuid';
 
-import './AddTripModal.module.scss';
+import styles from './AddTripModal.module.scss';
+import classNames from "classnames/bind";
+let cx = classNames.bind(styles);
 
 // import state
 import { useSelector } from "react-redux";
@@ -143,10 +145,10 @@ const AddTripModal = (props) => {
     }
 
     return (
-        <div className="add-trip">
-            <div className="add-trip__modal">
-                <div className="add-trip__date-selection">
-                    <h1 className="add-trip__title">Pick A Time</h1>
+        <div className={cx("add-trip")}>
+            <div className={cx("add-trip__modal")}>
+                <div className={cx("add-trip__date-selection")}>
+                    <h1 className={cx("add-trip__title")}>Pick A Time</h1>
                     <Calendar
                         className={['c1','c2']}
                         selectRange={true}
@@ -154,14 +156,14 @@ const AddTripModal = (props) => {
                         onClickDay={updateButton}
                     />
                 </div>
-                <form className="add-trip__form" onSubmit={handleSubmit}>
+                <form className={cx("add-trip__form")} onSubmit={handleSubmit}>
                     
-                    <input className="add-trip__input" type="text" onChange={handleChangeAndUpdateButton} name="startLocation" id="startLocation" placeholder="Start Location" value={startLocation} />
-                    <input className="add-trip__input" type="text" onChange={handleChangeAndUpdateButton} name="endLocation" id="endLocation" placeholder="End Location" value={endLocation} />
+                    <input className={cx("add-trip__input")} type="text" onChange={handleChangeAndUpdateButton} name="startLocation" id="startLocation" placeholder="Start Location" value={startLocation} />
+                    <input className={cx("add-trip__input")} type="text" onChange={handleChangeAndUpdateButton} name="endLocation" id="endLocation" placeholder="End Location" value={endLocation} />
 
-                    <input className="add-trip__input" type="text" onChange={updateButton} name="tripName" id="add-trip__trip-name" placeholder="Enter a trip name" />
-                    <button className="add-trip__button add-trip__submit" type="submit" id="submit-button">Start Planning</button>
-                    <button className="add-trip__button add-trip__cancel" onClick={props.toggleAddTrip}>Cancel</button>
+                    <input className={cx("add-trip__input")} type="text" onChange={updateButton} name="tripName" id="add-trip__trip-name" placeholder="Enter a trip name" />
+                    <button className={cx("add-trip__button", "add-trip__submit")} type="submit" id="submit-button">Start Planning</button>
+                    <button className={cx("add-trip__button", "add-trip__cancel")} onClick={props.toggleAddTrip}>Cancel</button>
                 </form>
             </div>
         </div>
